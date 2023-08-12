@@ -78,4 +78,26 @@
     </a>
   </li>
   {% endif %}
+  {% if site.bilibili_uid %}
+  <li>
+    <a target="_blank" href="https://space.bilibili.com/{{ site.bilibili_uid }}">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-bilibili fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  {% endif %}
+  {% if site.wilddream_username %}
+  <li>
+    <a target="_blank" href="https://www.wilddream.net/user/{{ site.wilddream_usrname }}">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-wilddream fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  {% endif %}
+
+  
 </ul>
