@@ -84,7 +84,7 @@ featured-tags: true # whether or not using Feature-Tags
 featured-condition-size: 1 # A tag will be featured if the size of it is more than this condition value
 
 # Progressive Web Apps
-chrome-tab-theme-color: "#000000"
+chrome-tab-theme-color: "#a2bcf1"
 service-worker: true
 
 # MathJax rendering for layout:page (e.g. post preview)
@@ -93,5 +93,5 @@ page-mathjax: true
 # Friends
 friends:
   [
-    { title: "Connection awaits", href: "https://www.bilibili.com/" },
+    { title: "Connection awaits", href: "127.0.0.1" },
   ]
