@@ -77,7 +77,7 @@ netease_comment: false
 # Sidebar settings
 sidebar: true # whether or not using Sidebar.
 sidebar-about-description: "Therefore, we connect."
-sidebar-avatar: '' # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: 'img/sidebar_avatar.jpg' # use absolute URL, seeing it's used in both `/` and `/about/`
 
 # Featured Tags
 featured-tags: true # whether or not using Feature-Tags
