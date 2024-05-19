@@ -4,7 +4,7 @@ title:      "真的，真的开始写了"
 subtitle:   "2lazy"
 date:       2024-05-14 17:00
 author:     "Akiras"
-hidden: false
+hidden: true
 header-img: ""
 tags:
     - 开发
