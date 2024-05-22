@@ -16,7 +16,7 @@ tags:
 本科阶段的毕业纪念作
 希望把一些被磨灭的初心留给值得的人
 
-![bprint_compressed](/_includes/projects/shrine/bprint_compressed.jpg)
+![bprint_compressed](/img/projects/shrine/bprint_compressed.jpg)
 
 只制作了12份。
 

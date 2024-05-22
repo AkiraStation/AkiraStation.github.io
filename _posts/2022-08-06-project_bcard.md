@@ -14,7 +14,7 @@ tags:
 当初为了参加极兽聚而做的一版名片
 因为社恐所以没有发出去很多...好在发出去的很多人都加了我
 
-![b-card](/_includes/projects/shrine/bcard_compressed.jpg)
+![b-card](/img/projects/shrine/bcard_compressed.jpg)
 
 这份周边不会再版
 虽然不再版了但还是拿来做主页sidebar的小头像了，毕竟也是头像风格化的满意之作uwu

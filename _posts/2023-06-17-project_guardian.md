@@ -15,7 +15,7 @@ tags:
 交错的人再也不见
 多说无益
 
-![guardian_compressed](/_includes/projects/shrine/guradian_compressed.jpg)
+![guardian_compressed](/img/projects/shrine/guradian_compressed.jpg)
 
 
-也可以在\[wilddream](https://www.wilddream.net/Art/view/25947 野梦外链)查看
+也可以在[wilddream](https://www.wilddream.net/Art/view/25947 野梦外链)查看
