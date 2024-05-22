@@ -5,7 +5,7 @@ subtitle:   "randomness"
 date:       2023-08-11 20:05
 author:     "Akiras"
 hidden: true
-header-img :404_bg.jpg
+header-img: default_header.jpg
 
 ---
 

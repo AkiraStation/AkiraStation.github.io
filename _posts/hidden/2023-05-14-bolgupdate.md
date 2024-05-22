@@ -5,7 +5,7 @@ subtitle:   "2lazy"
 date:       2024-05-14 17:00
 author:     "Akiras"
 hidden: true
-header-img :404_bg.jpg
+header-img: default_header.jpg
    
 ---
 

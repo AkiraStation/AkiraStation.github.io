@@ -4,7 +4,7 @@ layout: post
 date: 2000-01-01 00:00
 hidden: true
 author:     "Akiras"
-header-img :404_bg.jpg
+header-img: default_header.jpg
 ---
 
 Success Text.{:.success}

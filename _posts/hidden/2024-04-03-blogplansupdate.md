@@ -5,8 +5,8 @@ subtitle:   "randomness"
 date:       2024-04-03 11:00
 author:     "Akiras"
 hidden: true
-header-img :404_bg.jpg
- 
+header-img: default_header.jpg
+
 ---
 
 ## 一拖就是大半年
