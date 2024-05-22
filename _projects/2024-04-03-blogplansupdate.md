@@ -5,7 +5,7 @@ subtitle:   "randomness"
 date:       2024-04-03 11:00
 author:     "Akiras"
 hidden: true
-header-img: ""
+header-img :404_bg.jpg
  
 ---
 

@@ -1,12 +1,29 @@
 ---
 title: Projects
-layout: default
-description: 
+layout: articles
+description: 'nah'
 header-img: "img/projects_bg.jpg"
 header-mask: 0.3
-sidebar: false
+articles:
+  data_source: site.sample_page
+  type: grid
 ---
 
 
 <!-- Due to HuxBlog project modified default layouts , this page can not function correctly -->
+<!-- Page Header -->
+{% include intro-header.html type='page' %}
 
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    
+    <!-- NO SIDEBAR -->
+    <!-- PostList Container -->
+    <div class="zh post-container">
+        {% capture about_zh %}{% include about/zh.md %}{% endcapture %}
+        {{ about_zh | markdownify }}
+    </div>
+   
+  </div>
+</div>
