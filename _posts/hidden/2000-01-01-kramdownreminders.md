@@ -6,14 +6,10 @@ hidden: true
 author:     "Akiras"
 ---
 
-Success Text.
-{:.success}
-Info Text.
-{:.info}
-Warning Text.
-{:.warning}
-Error Text.
-{:.error}
+Success Text.{:.success}
+Info Text.{:.info}
+Warning Text.{:.warning}
+Error Text.{:.error}
 
 `success`{:.success}
 `info`{:.info}
