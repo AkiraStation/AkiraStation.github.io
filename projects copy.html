@@ -1,0 +1,24 @@
+---
+title: Projects
+layout:  articles
+description: 'nah'
+header-img: "img/projects_bg.jpg"
+articles:
+  data_source: _projects
+  type: grid
+---
+
+
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    
+    <!-- NO SIDEBAR -->
+    <!-- PostList Container -->
+    <div class="zh post-container">
+        {% capture about_zh %}{% include about/zh.md %}{% endcapture %}
+        {{ about_zh | markdownify }}
+    </div>
+   
+  </div>
+</div>
