@@ -6,9 +6,7 @@ date:       2023-08-11 20:05
 author:     "Akiras"
 hidden: true
 header-img: ""
-tags:
-    - 开发
-    - 整体计划    
+
 ---
 
 简单记录一下开发的规划：
