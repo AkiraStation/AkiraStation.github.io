@@ -1,5 +1,5 @@
 ---
-layout: page_nosidebar
+layout: default
 title: "About"
 description: "Collapse,Collect,Construct"
 header-img: "img/about_bg.jpg"
@@ -7,50 +7,49 @@ header-mask: 0.3
 sidebar: false
 ---
 
-<div class="zh post-container">
-    {% capture about_zh %}{% include about/zh.md %}{% endcapture %}
-    {{ about_zh | markdownify }}
-</div>
+<!-- Page Header -->
+{% include intro-header.html type='page' %}
 
-<!--{% include multilingual-sel.html %}-->
-
-<!-- Chinese Version -->
-
-<!--
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    
+    <!-- NO SIDEBAR -->
+    <!-- PostList Container -->
     <div class="zh post-container">
-    {% capture about_zh %}{% include about/zh.md %}{% endcapture %}
-    {{ about_zh | markdownify }}
+        {% capture about_zh %}{% include about/zh.md %}{% endcapture %}
+        {{ about_zh | markdownify }}
+    </div>
+    <!-- Sidebar Container -->
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1
+      sidebar-container">
+      <!-- Featured Tags -->
+      {% include featured-tags.html %}
+
+      <!-- Friends Blog -->
+      {% include friends.html %}
+    </div>
+  </div>
 </div>
--->
 
-<!-- English Version 
-<div class="en post-container">
-    {% capture about_en %}{% include about/en.md %}{% endcapture %}
-    {{ about_en | markdownify }}
-</div>
--->
-
-<!--{% if site.disqus_username %}-->
-<!-- disqus 评论框 start -->
-<!--<div class="comment">-->
-<!--    <div id="disqus_thread" class="disqus-thread"> -->
-<!---->
-<!--    </div>-->
-<!--</div>-->
-<!-- disqus 评论框 end -->
-
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-<!--<script type="text/javascript">-->
-<!--    /* * * CONFIGURATION VARIABLES * * */-->
-<!--    var disqus_shortname = "{{site.disqus_username}}";-->
-<!--    var disqus_identifier = "{{site.disqus_username}}/{{page.url}}";-->
-<!--    var disqus_url = "{{site.url}}{{page.url}}";-->
-<!---->
-<!--    (function () {-->
-<!--        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;-->
-<!--        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';-->
-<!--        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);-->
-<!--    })();-->
-<!--</script>-->
-<!-- disqus 公共JS代码 end -->
-<!--{% endif %}-->
+{% if site.page-mathjax %}
+<!-- Add support for Mathjax by Voleking-->
+<!-- If you want to see formulars well in post preview, Maybe you should add this.-->
+<!-- However, most of the time formulars may not appear in the post preview, you can delete it.-->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+{% endif %}
