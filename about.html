@@ -4,7 +4,13 @@ title: "About"
 description: "Collapse,Collect,Construct"
 header-img: "img/about_bg.jpg"
 header-mask: 0.3
+sidebar: false
 ---
+
+<div class="zh post-container">
+    {% capture about_zh %}{% include about/zh.md %}{% endcapture %}
+    {{ about_zh | markdownify }}
+</div>
 
 <!--{% include multilingual-sel.html %}-->
 
