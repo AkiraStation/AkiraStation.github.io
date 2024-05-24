@@ -18,4 +18,4 @@ tags:
 ![guardian_compressed](/img/shrine/guradian_compressed.jpg)
 
 
-也可以在[wilddream](https://www.wilddream.net/Art/view/25947 野梦外链)查看
+也可以在[wilddream](https://www.wilddream.net/Art/view/25947)查看

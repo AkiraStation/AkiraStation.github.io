@@ -17,5 +17,5 @@ tags:
 
 ![summer_compressed](/img/shrine/summer_compressed.jpg)
 
-也可以在[wilddream](https://www.wilddream.net/Art/view/27187 野梦外链)查看
-也可以在[X（旧推特）](https://twitter.com/A_Artchive/status/1540480790634856448?t=HQGu9KzXoWuuFrw-6cVCwA&s=19 黑叉外链)查看
+也可以在[wilddream](https://www.wilddream.net/Art/view/27187)查看
+也可以在[X（旧推特）](https://twitter.com/A_Artchive/status/1540480790634856448?t=HQGu9KzXoWuuFrw-6cVCwA&s=19)查看
