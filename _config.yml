@@ -91,7 +91,11 @@ service-worker: true
 page-mathjax: true
 
 # Friends
+#friends:
+#  [
+#    { title: "Connection awaits", href: "127.0.0.1" },
+#  ]
 friends:
   [
-    { title: "Connection awaits", href: "127.0.0.1" },
+  
   ]
