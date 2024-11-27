@@ -16,11 +16,11 @@ RSS: false
 #weibo_username: huxpro
 #zhihu_username: huxpro
 #github_username: huxpro
-twitter_username: _Akiras_
+#twitter_username: _Akiras_
 #facebook_username:  huxpro
 #linkedin_username:  firstname-lastname-idxxxx
-bilibili_uid: 4175639
-wilddream_username: akirame
+#bilibili_uid: 4175639
+#wilddream_username: akirame
 
 # Build settings
 # from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
