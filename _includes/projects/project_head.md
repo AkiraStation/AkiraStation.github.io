@@ -1,6 +1,6 @@
 -------------
 
-![周边鼠标垫](/img/smol/bprint_smol.jpg){:height="100px" width="100px"}   | [毕业纪念周边鼠标垫]()
+![周边鼠标垫](/img/smol/bprint_smol.jpg){:height="100px" width="100px"} | [毕业纪念周边鼠标垫]()
 
 -------------
 
@@ -8,7 +8,7 @@
 
 -------------
 
-![浅滩之夏](/img/smol/summer_smol.jpg){:height="100px" width="100px"}| [浅滩之夏]()
+![浅滩之夏](/img/smol/summer_smol.jpg){:height="100px" width="100px"} | [浅滩之夏]()
 
 -------------
 
