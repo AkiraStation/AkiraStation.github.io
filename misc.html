@@ -13,13 +13,14 @@ header-mask: 0.3
 <div class="container">
   <div class="row">
     </div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-    <!--misc list-->
-    <div class="misc-list js-result d-none">
+      <!--misc list-->
+      <div class="misc-list js-result d-none">
       {%- assign _sorted_misc = site.misc -%}
       {%- assign _sorted_misc = _sorted_list | sort: 'date' -%}
       {%- assign _sorted_misc = _sorted_misc | reverse -%}
 
       {%- for _miscky in _sorted_misc -%}
+      {%- assign _date = '' -%}
       {%- endfor -%}
       {%- assign _currentdate = _miscky.date | date: '%Y' -%}
       {%- if _currentdate != _date -%}
@@ -36,8 +37,6 @@ header-mask: 0.3
               </h2>
             </a>
             <hr>
-          </div>
-          
           </div>
       </div>
     <!--under construction-->
