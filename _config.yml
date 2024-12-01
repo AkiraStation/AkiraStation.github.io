@@ -99,3 +99,6 @@ friends:
   [
   
   ]
+collections:
+  misc:
+    output: true

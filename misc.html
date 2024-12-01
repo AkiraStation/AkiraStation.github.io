@@ -12,22 +12,21 @@ header-mask: 0.3
 <!-- Main Content -->
 <div class="container">
   <div class="row">
-    </div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <!--misc list-->
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <!-- misc list -->
       <div class="misc-list js-result d-none">
-      {%- assign _sorted_misc = site.misc -%}
-      {%- assign _sorted_misc = _sorted_misc | sort: 'date' -%}
-      {%- assign _sorted_misc = _sorted_misc | reverse -%}
+        {%- assign _sorted_misc = site.misc | sort: 'date' | reverse -%}
+        {%- assign _date = '' -%}
 
-      {%- for _miscky in _sorted_misc -%}
-      {%- assign _date = '' -%}
-      {%- endfor -%}
-      {%- assign _currentdate = _miscky.date | date: '%Y' -%}
-      {%- if _currentdate != _date -%}
-				{%- unless forloop.first -%}
-      </section>{%- endunless -%}<section>
-        <span class="fa listing-seperator"></span>
-        {%- assign _date = _currentdate -%}
+        {%- for _miscky in _sorted_misc -%}
+          {%- assign _currentdate = _miscky.date | date: '%Y' -%}
+          {%- if _currentdate != _date -%}
+            {%- unless forloop.first -%}
+              </section>
+            {%- endunless -%}
+            <section>
+              <span class="fa listing-seperator"></span>
+              {%- assign _date = _currentdate -%}
           {%- endif -%}
 
           <div class="misc-preview item">
@@ -38,7 +37,9 @@ header-mask: 0.3
             </a>
             <hr>
           </div>
+        {%- endfor -%}
       </div>
-    <!--under construction-->
+      <!-- under construction -->
+    </div>
   </div>
 </div>
