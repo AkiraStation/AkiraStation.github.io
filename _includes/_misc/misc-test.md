@@ -1,0 +1,7 @@
+---
+title:      misctest
+subtitle:   "clog"
+date:       2020-01-01 00:00
+side-img:   "greetings" 
+---
+hai
