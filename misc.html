@@ -20,6 +20,7 @@ header-mask: 0.3
       {%- assign _sorted_misc = _sorted_misc | reverse -%}
 
       {%- for _miscky in _sorted_misc -%}
+      {%- endfor -%}
       {%- assign _currentdate = _miscky.date | date: '%Y' -%}
       {%- if _currentdate != _date -%}
 				{%- unless forloop.first -%}
@@ -27,6 +28,7 @@ header-mask: 0.3
         <span class="fa listing-seperator"></span>
         {%- assign _date = _currentdate -%}
           {%- endif -%}
+
           <div class="misc-preview item">
             <a href="{{ _miscky.url | prepend: site.baseurl }}">
               <h2 class="misc-title">
@@ -35,6 +37,7 @@ header-mask: 0.3
             </a>
             <hr>
           </div>
+          
           </div>
       </div>
     <!--under construction-->
