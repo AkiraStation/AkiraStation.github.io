@@ -16,7 +16,7 @@ header-mask: 0.3
       <!--misc list-->
       <div class="misc-list js-result d-none">
       {%- assign _sorted_misc = site.misc -%}
-      {%- assign _sorted_misc = _sorted_list | sort: 'date' -%}
+      {%- assign _sorted_misc = _sorted_misc | sort: 'date' -%}
       {%- assign _sorted_misc = _sorted_misc | reverse -%}
 
       {%- for _miscky in _sorted_misc -%}
