@@ -16,15 +16,8 @@ header-mask: 0.3
       <!-- misc list -->
       <div class="misc-list js-result d-none">
         {%- assign _sorted_misc = site.misc | sort: 'date' | reverse -%}
-        {%- assign _date = '' -%}
-
+ 
         {%- for _miscky in _sorted_misc -%}
-        {%- assign _tags = '' -%}
-        {%- if forloop.last -%}
-        {%- endif -%}
-       
-              
-
           <div class="misc-preview item">
             <a href="{{ _miscky.url | prepend: site.baseurl }}">
               <h2 class="misc-title">
@@ -33,7 +26,7 @@ header-mask: 0.3
             </a>
             <hr>
           </div>{%- if forloop.last -%}
-				</section>{%- endif -%}
+				{%- endif -%}
         {%- endfor -%}
       </div>   
     </div>
