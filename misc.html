@@ -24,6 +24,12 @@ header-mask: 0.3
                 {{ _miscky.title }}
               </h2>
             </a>
+            <div class="post-content-preview">
+                  {{ post.content | strip_html | truncate:200 }}
+          </div>
+          <p class="post-meta">
+            Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
+        </p>
             <hr>
           </div>{%- if forloop.last -%}
 				{%- endif -%}
