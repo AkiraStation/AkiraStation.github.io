@@ -26,7 +26,9 @@ header-mask: 0.3
               <div class="row">
                 <div class="col-md-2">
                   {%- if _miscky.side-img -%}
-                    <img src="{{ _miscky.side-img }}" alt="{{ _miscky.title }}" class="img-responsive">
+                    <img src="{{ _miscky.side-img }}" class="img-responsive">
+                    {% else %}
+                    <img src="img/miscfaces/colins-prototype.png" class="img-responsive">
                   {%- endif -%}
                 </div>
                 <div class="col-md-10">
