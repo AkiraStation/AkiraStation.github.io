@@ -1,5 +1,5 @@
 ---
-title:      misctest2
+layout : misc
 subtitle:   "clog"
 date:       2022-01-01 00:00
 
