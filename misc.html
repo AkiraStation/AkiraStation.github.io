@@ -23,9 +23,19 @@ header-mask: 0.3
               <h2 class="misc-title">
                 {{ _miscky.title }}
               </h2>
-            <div class="misc-content-preview">
-                  {{ _miscky.content | strip_html | truncate:200 }}
-                </a>
+              <div class="row">
+                <div class="col-md-2">
+                  {%- if _miscky.side-img -%}
+                    <img src="{{ _miscky.side-img }}" alt="{{ _miscky.title }}" class="img-responsive">
+                  {%- endif -%}
+                </div>
+                <div class="col-md-10">
+                  <div class="misc-content-preview">
+                    {{ _miscky.content | strip_html | truncate:200 }}
+                  </div>
+                </div>
+              </div>
+            </a>
           </div>
           <p class="post-meta"font size="2">
             Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
