@@ -250,6 +250,9 @@ th {
   .dropup > .btn > .caret {
     border-top-color: #000 !important;
   }
+  .img-fluid {
+    max-width: 25%;
+  }
   .label {
     border: 1px solid #000;
   }
