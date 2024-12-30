@@ -33,15 +33,14 @@ header-mask: 0.3
                     {{ _miscky.content | strip_html | truncate:300 }}
                   </div>
                  </div>
-                
-              </div>
+                </div>
             </a>
           </div>
-          <p class="post-meta"font size="1">
+          <p class="post-meta" font_size="1">
             Posted by {% if _miscky.author %}{{ _miscky.author }}{% else %}{{ site.title }}{% endif %} on {{ _miscky.date | date: "%B %-d, %Y" }}
         </p>
             <hr>
-          </div>{%- if forloop.last -%}
+          {%- if forloop.last -%}
 				{%- endif -%}
         {%- endfor -%}
       </div>   
