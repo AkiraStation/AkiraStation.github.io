@@ -22,9 +22,9 @@ header-mask: 0.3
             <a href="{{ _miscky.url | prepend: site.baseurl }}">
                 <div class="col-lg-1  col-md-1 ">
                   {%- if _miscky.side-img -%}
-                    <img src="{{ site.baseurl }}/img/miscfaces/{{ _miscky.side-img }}">
+                    <img-fluid src="{{ site.baseurl }}/img/miscfaces/{{ _miscky.side-img }}">
                     {% else %}
-                    <img src="{{ site.baseurl }}/img/miscfaces/colins-prototype.png">
+                    <img-fluid src="{{ site.baseurl }}/img/miscfaces/colins-prototype.png">
                   {%- endif -%}
                 </div>
                 <div class="col-lg-11 col-md-7">
