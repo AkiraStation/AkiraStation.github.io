@@ -20,19 +20,17 @@ header-mask: 0.3
         {%- for _miscky in _sorted_misc -%}
           <div class="misc-preview item">
             <a href="{{ _miscky.url | prepend: site.baseurl }}">
-              <div class="row">
                 <div class="col-lg-1  col-md-1 ">
                   {%- if _miscky.side-img -%}
-                    <img src="{{ site.baseurl }}/img/miscfaces/{{ _miscky.side-img }}" width="20%">
+                    <img src="{{ site.baseurl }}/img/miscfaces/{{ _miscky.side-img }}">
                     {% else %}
-                    <img src="{{ site.baseurl }}/img/miscfaces/colins-prototype.png" width="20%">
+                    <img src="{{ site.baseurl }}/img/miscfaces/colins-prototype.png">
                   {%- endif -%}
                 </div>
-                <div class="col-lg-7 col-md-11">
+                <div class="col-lg-11 col-md-7">
                   <div class="misc-content-preview">
                     {{ _miscky.content | strip_html | truncate:300 }}
                   </div>
-                 </div>
                 </div>
             </a>
           </div>
