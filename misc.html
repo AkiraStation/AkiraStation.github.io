@@ -18,16 +18,16 @@ header-mask: 0.3
         {%- assign _sorted_misc = site.misc | sort: 'date' | reverse -%}
  
         {%- for _miscky in _sorted_misc -%}
-          <div class="misc-preview-item row">
+          <div class="misc-preview-item row d-flex align-items-stretch">
             <a href="{{ _miscky.url | prepend: site.baseurl }}">
-                <div class="col-lg-3  col-md-2 col-xs-2 d-flex align-items-stretch" style="padding-left:0; padding-right:0;">
+                <div class="col-lg-3  col-md-2 col-xs-2 d-flex " style="padding-left:0; padding-right:0;">
                   {%- if _miscky.side-img -%}
                     <img src="{{ site.baseurl }}/img/miscfaces/{{ _miscky.side-img }}" style="width: 100%; height: auto;">
                     {% else %}
                     <img src="{{ site.baseurl }}/img/miscfaces/colins-prototype.png" style="width: 100%; height: auto;">
                   {%- endif -%}
                 </div>
-                <div class="col-lg-9 col-md-10 col-xs-10 d-flex align-items-stretch">
+                <div class="col-lg-9 col-md-10 col-xs-10">
                   <div class="misc-content-preview">
                     {{ _miscky.content | strip_html | truncate:300 }}
                   </div>
