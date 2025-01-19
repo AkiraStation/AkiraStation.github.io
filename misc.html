@@ -12,22 +12,22 @@ header-mask: 0.3
 <!-- Main Content -->
 <div class="container">
   <div class="row">
-    <div class="col-lg-9 col-lg-offset-3 col-md-10 col-md-offset-2 col-xs-12">
+    <div class="col-lg-10 col-lg-offset-2 col-md-10 col-md-offset-2 col-xs-12">
       <!-- misc list -->
       <div class="misc-list js-result">
         {%- assign _sorted_misc = site.misc | sort: 'date' | reverse -%}
  
         {%- for _miscky in _sorted_misc -%}
-          <div class="misc-preview item">
+          <div class="misc-preview-item row">
             <a href="{{ _miscky.url | prepend: site.baseurl }}">
-                <div class="col-lg-3  col-md-2 col-xs-2">
+                <div class="col-lg-3  col-md-2 col-xs-2 d-flex align-items-stretch" style="padding-left:0; padding-right:0;">
                   {%- if _miscky.side-img -%}
                     <img src="{{ site.baseurl }}/img/miscfaces/{{ _miscky.side-img }}" style="width: 100%; height: auto;">
                     {% else %}
                     <img src="{{ site.baseurl }}/img/miscfaces/colins-prototype.png" style="width: 100%; height: auto;">
                   {%- endif -%}
                 </div>
-                <div class="col-lg-9 col-md-10 col-xs-10">
+                <div class="col-lg-9 col-md-10 col-xs-10 d-flex align-items-stretch">
                   <div class="misc-content-preview">
                     {{ _miscky.content | strip_html | truncate:300 }}
                   </div>
