@@ -34,11 +34,11 @@ header-mask: 0.3
                 </div>
             </a>
           </div>
-          <p class="post-meta" style="font-size: 12px; margin-top: 0;margin-bottom:0 ;">
+          <p class="post-meta" style="font-size: 12px; margin-bottom:0 ;">
             Posted by {% if _miscky.author %}{{ _miscky.author }}{% else %}{{ site.title }}{% endif %} on {{ _miscky.date | date: "%B %-d, %Y" }}
         </p>
         <div width = "100%"></div>
-            <hr>
+            <hr style = "margin-top: 0;">
           {%- if forloop.last -%}
 				{%- endif -%}
         {%- endfor -%}
