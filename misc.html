@@ -22,9 +22,9 @@ header-mask: 0.3
             <a href="{{ _miscky.url | prepend: site.baseurl }}">
                 <div class="col-lg-3  col-md-2 col-xs-2">
                   {%- if _miscky.side-img -%}
-                    <img src="{{ site.baseurl }}/img/miscfaces/{{ _miscky.side-img }}" class="img-fluid" height: = "auto">
+                    <img src="{{ site.baseurl }}/img/miscfaces/{{ _miscky.side-img }}" width: = "80%">
                     {% else %}
-                    <img src="{{ site.baseurl }}/img/miscfaces/colins-prototype.png" class="img-fluid" height: = "auto">
+                    <img src="{{ site.baseurl }}/img/miscfaces/colins-prototype.png"  width: = "80%">
                   {%- endif -%}
                 </div>
                 <div class="col-lg-9 col-md-10 col-xs-10">
@@ -37,6 +37,7 @@ header-mask: 0.3
           <p class="post-meta" style="font-size: 14px;">
             Posted by {% if _miscky.author %}{{ _miscky.author }}{% else %}{{ site.title }}{% endif %} on {{ _miscky.date | date: "%B %-d, %Y" }}
         </p>
+        <div class="w-100"></div>
             <hr>
           {%- if forloop.last -%}
 				{%- endif -%}
