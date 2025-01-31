@@ -1,6 +1,6 @@
 # Site settings
 title: AkiraStation
-SEOTitle: Therefore, we connect.
+SEOTitle: Therefore, you refused my connection.
 header-img: img/header_img.jpg
 email: akiras_connect@outlookl.com
 description: "这里是Akiras的博客与画作的静态备份 | Here lies the blog and artwork of Akiras"
@@ -76,7 +76,7 @@ netease_comment: false
 
 # Sidebar settings
 sidebar: true # whether or not using Sidebar.
-sidebar-about-description: "Therefore, we connect."
+sidebar-about-description: "Therefore, you refused my connection."
 sidebar-avatar: 'img/sidebar_avatar.jpg' # use absolute URL, seeing it's used in both `/` and `/about/`
 
 # Featured Tags
