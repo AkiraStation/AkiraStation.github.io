@@ -8,3 +8,5 @@ header-img: img/default_header.jpg
 tags: 
 
 ---
+
+也许我们已经离这个世界很远了。
