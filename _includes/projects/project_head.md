@@ -23,3 +23,8 @@
 ![clog](/img/smol/clog_smol.jpg){:height="100px" width="100px"}| [纪念图](https://akirastation.github.io/2020/01/01/project_clog/)|
 
 -------------
+
+|:---:|:---:|
+![token](/img/smol/token_smol.jpg){:height="100px" width="100px"}| [代币](https://akirastation.github.io/2025/10/29/project_token/)|
+
+-------------
