@@ -1,10 +1,10 @@
 # Site settings
 title: AkiraStation
 SEOTitle: Therefore, you refused my connection.
-header-img: img/header_img.jpg
-email: akiras_connect@outlookl.com
+header-img: img/default_header.jpg
+email: akiras_connect@outlook.com
 description: "这里是Akiras的博客与画作的静态备份 | Here lies the blog and artwork of Akiras"
-keyword: "keyword_test"
+# keyword: "关键词1, 关键词2"  # 用于 <meta name="keywords">；注释掉或留空则不输出该标签
 url: "https://AkiraStation.github.io" # your host, for absolute URL
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 
@@ -35,6 +35,7 @@ exclude:
     "package.json",
     "README.md",
     "README.zh.md",
+    "RESOURCE_CHECKLIST.md",
   ]
 anchorjs: true # if you want to customize anchor. check out line:181 of `post.html`
 # If you have timezone issue (e.g. #68) in China, uncomment to use this:

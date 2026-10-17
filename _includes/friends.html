@@ -1,4 +1,7 @@
-{% if site.friends %}
+{% comment %}
+    注意：Liquid 中空数组为真值，必须显式判断 size，否则 friends 为空时仍会渲染出一个空的 FRIENDS 区块。
+{% endcomment %}
+{% if site.friends and site.friends.size > 0 %}
 <hr>
 <h5>FRIENDS</h5>
 <ul class="list-inline">

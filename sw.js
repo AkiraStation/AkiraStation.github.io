@@ -12,6 +12,12 @@
 const CACHE_NAMESPACE = 'main-'
 
 const CACHE = CACHE_NAMESPACE + 'precache-then-runtime';
+
+// NOTE: cache.addAll() 是原子操作 —— 列表里只要有一个 URL 404，整个 install 就会失败，
+//       进而导致 Service Worker 无法激活、离线功能完全不可用。
+//       因此这里只允许出现仓库中确实存在的文件。
+// TODO(资源待补): 补好 img/icon_wechat.png 与 img/home-bg.jpg 后，取消下面两行注释。
+//                详见根目录 RESOURCE_CHECKLIST.md
 const PRECACHE_LIST = [
   "./",
   "./offline.html",
@@ -19,10 +25,10 @@ const PRECACHE_LIST = [
   "./js/bootstrap.min.js",
   "./js/hux-blog.min.js",
   "./js/snackbar.js",
-  "./img/icon_wechat.png",
+  // "./img/icon_wechat.png",  // 目前仓库中不存在
   "./img/sidebar_avatar.jpg",
-  "./img/home-bg.jpg",
-  "./img/404-bg.jpg",
+  // "./img/home-bg.jpg",      // 目前仓库中不存在
+  "./img/404_bg.jpg",          // 注意是下划线命名；原写作 404-bg.jpg（该文件不存在）
   "./css/hux-blog.min.css",
   "./css/bootstrap.min.css"
   // "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css",

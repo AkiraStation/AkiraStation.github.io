@@ -4,7 +4,12 @@ description: "「只剩下无尽的门扉」"
 header-img: "img/default_header.jpg"
 ---
 
-{% for post in paginator.posts %}
+{% comment %}
+    首页只列出 hidden != true 的文章。
+    注意：hidden 仅作用于本页；归档页(fblogs)、搜索(search.json)、RSS(feed.xml) 仍会收录这些文章。
+    若希望某篇文章在全站彻底消失，请改用 Jekyll 原生的 `published: false`。
+{% endcomment %}
+{% for post in paginator.posts %}{% unless post.hidden %}
 <div class="post-preview">
     <a href="{{ post.url | prepend: site.baseurl }}">
         <h2 class="post-title">
@@ -28,7 +33,7 @@ header-img: "img/default_header.jpg"
     </p>
 </div>
 <hr>
-{% endfor %}
+{% endunless %}{% endfor %}
 
 <!-- Pager -->
 {% if paginator.total_pages > 1 %}
