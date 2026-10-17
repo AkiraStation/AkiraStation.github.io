@@ -73,14 +73,18 @@
 ## 七、推送前自检（不需要装 Ruby）
 
 本机没有 Ruby，无法本地 `jekyll build`；但有两类错误会让 GitHub Pages **整个构建失败**（站点直接报错），
-所以这里放了两个零依赖的 Node 自检脚本，推送前跑一遍即可（在仓库根目录执行）：
+所以这里放了三个零依赖的 Node 自检脚本，推送前跑一遍即可（在仓库根目录执行）：
 
 ```bash
 node scripts/lint-liquid.js .   # Liquid 块标签嵌套（能抓 {% if %}…{% endfor %} 这类错序）
 node scripts/lint-yaml.js .     # front matter / _config.yml / _data 的 YAML 子集校验
+node scripts/lint-vars.js .     # 变量引用是否存在（抓「渲染成空白但不报错」的错键）
 ```
 
 `lint-yaml.js` 会检查：制表符缩进、顶层重复键、值里未加引号的「冒号+空格」、引号未闭合、
 以及 **文件 BOM**（front matter 前带 BOM 会让 Jekyll 认不出它）。
 
-两个脚本都在 `_config.yml` 的 `exclude` 里，不会被发布到站点上。
+`lint-vars.js` 覆盖另一类静默失败：引用了数据里不存在的键时 Jekyll 不报错、只渲染成空白。
+它校验 `site.*`、`page.*`、`site.data.home.*`（含 `assign` 别名）与 include 参数契约。
+
+三个脚本都在 `_config.yml` 的 `exclude` 里，不会被发布到站点上。

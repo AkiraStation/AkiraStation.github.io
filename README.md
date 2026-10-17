@@ -97,10 +97,15 @@ bundle exec jekyll serve
 ```bash
 node scripts/lint-liquid.js .   # Liquid 块标签嵌套（能抓 {% if %}…{% endfor %} 这类错序）
 node scripts/lint-yaml.js .     # front matter / _config.yml / _data 的 YAML 子集校验
+node scripts/lint-vars.js .     # 变量引用：site.X / page.X / site.data.home.X 是否真的存在
 ```
 
 `lint-yaml.js` 检查：制表符缩进、顶层重复键、值里未加引号的「冒号+空格」、引号未闭合、
 以及**文件 BOM**（front matter 前带 BOM 会让 Jekyll 认不出它）。
+
+`lint-vars.js` 覆盖另一类**静默失败**：模板里引用了数据中不存在的键时，Jekyll 不报错、
+只渲染成空白。它会校验 `site.*`、`page.*`、`site.data.home.*`（含 `assign` 出来的别名）
+以及 include 的参数契约。三个脚本都做过负向测试，确认能抓到真实错误。
 
 ## 已知约束
 
