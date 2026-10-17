@@ -1,0 +1,31 @@
+{%- assign h = site.data.home.hero -%}
+<section class="hero">
+  {%- if h.image %}
+  <img class="hero-media" src="{{ h.image | relative_url }}" alt=""
+       fetchpriority="high" decoding="async">
+  {%- endif %}
+  <div class="hero-scrim" style="--hero-mask: {{ h.mask | default: 0.55 }}"></div>
+
+  <div class="container">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">{{ h.eyebrow | default: site.title }}</p>
+      <h1 class="hero-title">{{ h.title | default: site.SEOTitle }}</h1>
+      {%- if h.subtitle %}
+      <p class="hero-sub">{{ h.subtitle }}</p>
+      {%- endif %}
+
+      {%- if h.cta.size > 0 %}
+      <div class="hero-actions">
+        {%- for cta in h.cta %}
+        <a class="btn btn--{{ cta.style | default: 'primary' }}" href="{{ cta.url | relative_url }}">{{ cta.label }}</a>
+        {%- endfor %}
+      </div>
+      {%- endif %}
+
+      <div class="hero-scroll">
+        <span class="hero-scroll-line" aria-hidden="true"></span>
+        <span>Scroll</span>
+      </div>
+    </div>
+  </div>
+</section>

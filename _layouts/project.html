@@ -1,0 +1,102 @@
+---
+layout: base
+---
+{%- comment -%}
+  项目详情页。字段来自 _projects/*.md：
+  title / subtitle / date / author / year / type / cover / thumb / summary /
+  gallery / tools / links / tags
+{%- endcomment -%}
+
+<article class="project">
+  <div class="project-hero">
+    {%- if page.cover %}
+    <img class="project-cover" src="{{ page.cover | relative_url }}" alt="{{ page.title }}"
+         fetchpriority="high" decoding="async">
+    {%- endif %}
+    <div class="container">
+      <div class="project-head">
+        <p class="section-eyebrow">
+          {{ page.type | default: '项目' }}{% if page.year %} · {{ page.year }}{% endif %}
+        </p>
+        <h1 class="project-title">{{ page.title }}</h1>
+        {%- if page.subtitle %}
+        <p class="project-sub">{{ page.subtitle }}</p>
+        {%- endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="container container--narrow">
+    <dl class="project-meta">
+      {%- if page.year %}
+      <div><dt>年份</dt><dd>{{ page.year }}</dd></div>
+      {%- endif %}
+      {%- if page.type %}
+      <div><dt>类型</dt><dd>{{ page.type }}</dd></div>
+      {%- endif %}
+      {%- if page.author %}
+      <div><dt>作者</dt><dd>{{ page.author }}</dd></div>
+      {%- endif %}
+      {%- if page.tools %}
+      <div><dt>工具</dt><dd>{{ page.tools | join: ' · ' }}</dd></div>
+      {%- endif %}
+      {%- if page.tags %}
+      <div><dt>标签</dt><dd>{{ page.tags | join: ' · ' }}</dd></div>
+      {%- endif %}
+    </dl>
+
+    {%- if content != '' %}
+    <div class="prose">{{ content }}</div>
+    {%- endif %}
+
+    {%- if page.gallery and page.gallery.size > 0 %}
+    <div class="project-gallery">
+      {%- for shot in page.gallery %}
+      <img src="{{ shot | relative_url }}" alt="{{ page.title }} 图片 {{ forloop.index }}"
+           loading="lazy" decoding="async">
+      {%- endfor %}
+    </div>
+    {%- endif %}
+
+    {%- if page.links %}
+    <p class="section-sub">
+      相关链接：
+      {%- for l in page.links %}
+      <a href="{{ l.url }}">{{ l.label }}</a>{% unless forloop.last %} · {% endunless %}
+      {%- endfor %}
+    </p>
+    {%- endif %}
+
+    {%- comment -%} 同系列的前后项目（按日期倒序，较新 → 较旧） {%- endcomment -%}
+    {%- assign works = site.projects | sort: 'date' | reverse -%}
+    {%- assign prev_url = '' -%}{%- assign prev_title = '' -%}
+    {%- assign next_url = '' -%}{%- assign next_title = '' -%}
+    {%- assign found = false -%}
+    {%- for w in works -%}
+      {%- if w.url == page.url -%}
+        {%- assign found = true -%}
+      {%- elsif found -%}
+        {%- if next_url == '' -%}
+          {%- assign next_url = w.url -%}{%- assign next_title = w.title -%}
+        {%- endif -%}
+      {%- else -%}
+        {%- assign prev_url = w.url -%}{%- assign prev_title = w.title -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if prev_url != '' or next_url != '' %}
+    <nav class="project-pager" aria-label="项目导航">
+      {%- if prev_url != '' %}
+      <a class="pager-link" href="{{ prev_url | relative_url }}">
+        <span>较新</span>{{ prev_title }}
+      </a>
+      {%- endif %}
+      {%- if next_url != '' %}
+      <a class="pager-link pager-link--next" href="{{ next_url | relative_url }}">
+        <span>较旧</span>{{ next_title }}
+      </a>
+      {%- endif %}
+    </nav>
+    {%- endif %}
+  </div>
+</article>

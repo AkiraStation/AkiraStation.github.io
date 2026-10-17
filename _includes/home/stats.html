@@ -1,0 +1,29 @@
+{%- assign works = site.projects | sort: 'date' -%}
+{%- assign y_first = works.first.date | date: '%Y' | times: 1 -%}
+{%- assign y_last = works.last.date | date: '%Y' | times: 1 -%}
+{%- assign span = y_last | minus: y_first | plus: 1 -%}
+
+<section class="stats">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat">
+        <div class="stat-value">{{ works.size }}<span>.</span></div>
+        <div class="stat-label">项目</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">{{ site.posts.size }}<span>.</span></div>
+        <div class="stat-label">文字</div>
+      </div>
+      {%- if works.size > 0 %}
+      <div class="stat">
+        <div class="stat-value">{{ span }}<span> 年</span></div>
+        <div class="stat-label">创作跨度</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">{{ y_first }}<span>–</span>{{ y_last }}</div>
+        <div class="stat-label">时间线</div>
+      </div>
+      {%- endif %}
+    </div>
+  </div>
+</section>

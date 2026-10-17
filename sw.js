@@ -21,25 +21,17 @@ const CACHE = CACHE_NAMESPACE + 'precache-then-runtime';
 const PRECACHE_LIST = [
   "./",
   "./offline.html",
-  "./js/jquery.min.js",
-  "./js/bootstrap.min.js",
-  "./js/hux-blog.min.js",
+  "./css/site.css",
+  "./js/site.js",
   "./js/snackbar.js",
-  // "./img/icon_wechat.png",  // 目前仓库中不存在
   "./img/sidebar_avatar.jpg",
-  // "./img/home-bg.jpg",      // 目前仓库中不存在
-  "./img/404_bg.jpg",          // 注意是下划线命名；原写作 404-bg.jpg（该文件不存在）
-  "./css/hux-blog.min.css",
-  "./css/bootstrap.min.css"
-  // "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css",
-  // "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/fonts/fontawesome-webfont.woff2?v=4.6.3",
-  // "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"
+  "./img/404_bg.jpg"          // 注意是下划线命名（原写作 404-bg.jpg，该文件不存在）
+  // "./img/icon_wechat.png",
+  // "./img/home-bg.jpg"
 ]
 const HOSTNAME_WHITELIST = [
   self.location.hostname,
-  "huangxuan.me",
-  "yanshuo.io",
-  "cdnjs.cloudflare.com"
+  "cdnjs.cloudflare.com"      // 仅在页面启用 MathJax 时用到
 ]
 const DEPRECATED_CACHES = ['precache-v1', 'runtime', 'main-precache-v1', 'main-runtime']
 
@@ -182,11 +174,7 @@ self.addEventListener('fetch', event => {
       return;
     }
 
-    // Cache-only Startgies for ys.static resources
-    if (event.request.url.indexOf('ys.static') > -1){
-      event.respondWith(fetchHelper.cacheFirst(event.request.url))
-      return;
-    }
+    // Cache-only Strategies for static resources（旧站 ys.static 专用分支已随主题重写移除）
 
     // Stale-while-revalidate for possiblily dynamic content
     // similar to HTTP's stale-while-revalidate: https://www.mnot.net/blog/2007/12/12/stale

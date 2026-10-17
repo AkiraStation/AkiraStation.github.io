@@ -1,17 +1,21 @@
 ---
-layout: default
+layout: base
 title: 404
-hide-in-nav: true
 description: "对于一个开放的仓库来说，这里没有你想要的秘密——别把土司烤焦了"
-header-img: "img/404_bg.jpg"
+cover: /img/404_bg.jpg
 permalink: /404.html
-header-mask: 0.3
 ---
 
+<section class="error-page">
+  <div class="container">
+    <p class="error-code">404</p>
+    <h1 class="error-title">这一页不存在</h1>
+    <p class="section-sub">{{ page.description }}</p>
 
-<!-- Page Header -->
-{% include intro-header.html type="page" short='true' %}
-
-<script>
-	document.body.classList.add('page-fullscreen');
-</script>
+    <div class="hero-actions">
+      <a class="btn btn--primary" href="{{ '/' | relative_url }}">回到首页</a>
+      <a class="btn btn--ghost" href="{{ '/projects/' | relative_url }}">看看作品</a>
+      <a class="btn btn--ghost" href="{{ '/fblogs/' | relative_url }}">读点文字</a>
+    </div>
+  </div>
+</section>

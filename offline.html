@@ -1,16 +1,18 @@
 ---
-layout: default
+layout: base
 title: Offline
-hide-in-nav: true
 description: "阅读过的页面可以在离线时访问"
-header-img: "img/404_bg.jpg"
 permalink: /offline.html
 ---
 
+<section class="error-page">
+  <div class="container">
+    <p class="section-eyebrow">Offline</p>
+    <h1 class="error-title">当前离线</h1>
+    <p class="section-sub">阅读过的页面仍然可以访问。恢复网络后刷新即可发现新的内容。</p>
 
-<!-- Page Header -->
-{% include intro-header.html type="page" %}
-
-<script>
-	document.body.classList.add('page-fullscreen');
-</script>
+    <div class="hero-actions">
+      <a class="btn btn--primary" href="{{ '/' | relative_url }}">回到首页</a>
+    </div>
+  </div>
+</section>

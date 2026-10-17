@@ -1,0 +1,24 @@
+{%- comment -%}
+  作品筛选条：类型 × 年份（AND 组合），由 js/site.js 处理。
+  每个 chip 的 data-value 会成为筛选状态值；卡片上是 data-type / data-year。
+{%- endcomment -%}
+{%- assign works = site.projects -%}
+
+<div class="filter" data-filter-group="type">
+  <span class="filter-label">类型</span>
+  <button class="chip is-active" type="button" data-value="all">全部</button>
+  {%- assign types = works | map: 'type' | compact | uniq -%}
+  {%- for t in types %}
+  <button class="chip" type="button" data-value="{{ t }}">{{ t }}</button>
+  {%- endfor %}
+  <span class="filter-count" data-filter-count>{{ works.size }} 项</span>
+</div>
+
+<div class="filter" data-filter-group="year">
+  <span class="filter-label">年份</span>
+  <button class="chip is-active" type="button" data-value="all">全部</button>
+  {%- assign years = works | map: 'year' | compact | uniq | sort | reverse -%}
+  {%- for y in years %}
+  <button class="chip" type="button" data-value="{{ y }}">{{ y }}</button>
+  {%- endfor %}
+</div>

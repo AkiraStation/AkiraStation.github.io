@@ -1,0 +1,20 @@
+{%- assign s = site.data.home.projects_section -%}
+<section class="section" id="works">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div>
+        <p class="section-eyebrow">{{ s.eyebrow | default: 'Works' }}</p>
+        <h2 class="section-title">{{ s.title | default: '项目与作品' }}</h2>
+        {%- if s.subtitle %}
+        <p class="section-sub">{{ s.subtitle }}</p>
+        {%- endif %}
+      </div>
+      <a class="section-link" href="{{ '/projects/' | relative_url }}">
+        全部项目 <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    {% include works/filter.html %}
+    {% include works/grid.html %}
+  </div>
+</section>

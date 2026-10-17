@@ -1,0 +1,21 @@
+---
+layout: base
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div>
+        <p class="section-eyebrow">{{ page.eyebrow | default: 'Works' }}</p>
+        <h1 class="section-title">{{ page.title | default: '项目与作品' }}</h1>
+        {%- if page.description %}
+        <p class="section-sub">{{ page.description }}</p>
+        {%- endif %}
+      </div>
+      <a class="section-link" href="{{ '/' | relative_url }}">返回首页 <span aria-hidden="true">←</span></a>
+    </div>
+
+    {% include works/filter.html %}
+    {% include works/grid.html %}
+  </div>
+</section>

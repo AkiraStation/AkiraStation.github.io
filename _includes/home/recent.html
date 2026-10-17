@@ -1,0 +1,34 @@
+{%- assign s = site.data.home.recent_section -%}
+{%- assign n = s.count | default: 4 -%}
+
+<section class="section">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div>
+        <p class="section-eyebrow">{{ s.eyebrow | default: 'Writing' }}</p>
+        <h2 class="section-title">{{ s.title | default: '近作' }}</h2>
+        {%- if s.subtitle %}
+        <p class="section-sub">{{ s.subtitle }}</p>
+        {%- endif %}
+      </div>
+      <a class="section-link" href="{{ '/fblogs/' | relative_url }}">
+        全部文字 <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="posts">
+      {%- for post in site.posts limit: n %}{% unless post.hidden %}
+      <a class="post-row" href="{{ post.url | relative_url }}" data-reveal>
+        <div class="post-row-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+        <div class="post-row-body">
+          <div class="post-row-title">{{ post.title }}</div>
+          {%- if post.subtitle %}
+          <div class="post-row-sub">{{ post.subtitle }}</div>
+          {%- endif %}
+        </div>
+        <div class="post-row-meta">{{ post.date | date: '%Y.%m.%d' }}</div>
+      </a>
+      {%- endunless %}{% endfor %}
+    </div>
+  </div>
+</section>

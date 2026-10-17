@@ -1,14 +1,31 @@
 ---
 layout: null
 ---
+{%- comment -%}
+  站内搜索索引：文章 + 项目合并为一个数组。
+  每项字段：title / subtitle / tags / url / date / kind
+{%- endcomment -%}
 [
-  {% for post in site.posts %}
-    {
-      "title"    : "{{ post.title | escape }}",
-      "subtitle" : "{{ post.subtitle | escape }}",
-      "tags"     : "{{ post.tags | join: ', ' }}",
-      "url"      : "{{ site.baseurl }}{{ post.url }}",
-      "date"     : "{{ post.date }}"
-    } {% unless forloop.last %},{% endunless %}
-  {% endfor %}
+{%- for post in site.posts -%}
+  {
+    "title": {{ post.title | default: '' | jsonify }},
+    "subtitle": {{ post.subtitle | default: '' | jsonify }},
+    "tags": {{ post.tags | join: ', ' | jsonify }},
+    "url": {{ post.url | relative_url | jsonify }},
+    "date": {{ post.date | date: '%Y-%m-%d' | jsonify }},
+    "kind": "post"
+  }{% unless forloop.last %},{% endunless %}
+{%- endfor -%}
+{%- if site.posts.size > 0 and site.projects.size > 0 %},{% endif -%}
+{%- assign works = site.projects | sort: 'date' | reverse -%}
+{%- for work in works -%}
+  {
+    "title": {{ work.title | default: '' | jsonify }},
+    "subtitle": {{ work.subtitle | default: '' | jsonify }},
+    "tags": {{ work.tags | join: ', ' | jsonify }},
+    "url": {{ work.url | relative_url | jsonify }},
+    "date": {{ work.date | date: '%Y-%m-%d' | jsonify }},
+    "kind": "project"
+  }{% unless forloop.last %},{% endunless %}
+{%- endfor -%}
 ]

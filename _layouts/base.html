@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+{% include base/head.html %}
+
+<body>
+  {% include base/nav.html %}
+
+  <main id="main">
+    {{ content }}
+  </main>
+
+  {% include base/footer.html %}
+  {% include base/search.html %}
+
+  <script src="{{ '/js/site.js' | relative_url }}" defer></script>
+
+  {%- if site.service-worker %}
+  <script src="{{ '/js/snackbar.js' | relative_url }}" defer></script>
+  <script src="{{ '/js/sw-registration.js' | relative_url }}" defer></script>
+  {%- endif %}
+</body>
+
+</html>

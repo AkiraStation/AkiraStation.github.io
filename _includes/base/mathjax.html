@@ -1,0 +1,16 @@
+{%- comment -%}
+  MathJax（按页启用）：在文章/页面的 front matter 里写 `mathjax: true` 才会加载。
+  这是外部 CDN 依赖，所以默认不加载。
+{%- endcomment -%}
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "AMS" } },
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

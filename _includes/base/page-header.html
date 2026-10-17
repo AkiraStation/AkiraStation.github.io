@@ -1,0 +1,25 @@
+{%- comment -%}
+  通用页头：标题 + 描述（可选封面图 / 可选元信息）
+  用法：{% include base/page-header.html %} 或带参数 meta="2026 · 05 · 03 · Akiras"
+{%- endcomment -%}
+{%- assign eyebrow = include.eyebrow | default: page.eyebrow -%}
+{%- assign cover = page.cover | default: page['header-img'] -%}
+
+<header class="page-header{% if cover %} page-header--media{% endif %}"
+  {%- if cover %} style="--cover: url('{{ cover | relative_url }}')"{% endif %}>
+  <div class="container container--narrow">
+    {%- if eyebrow %}
+    <p class="section-eyebrow">{{ eyebrow }}</p>
+    {%- endif %}
+
+    <h1 class="page-title">{{ page.title | default: site.title }}</h1>
+
+    {%- if include.meta %}
+    <p class="page-meta">{{ include.meta }}</p>
+    {%- endif %}
+
+    {%- if page.description %}
+    <p class="section-sub">{{ page.description }}</p>
+    {%- endif %}
+  </div>
+</header>

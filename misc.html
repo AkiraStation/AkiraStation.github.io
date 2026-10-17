@@ -1,48 +1,32 @@
 ---
-layout: default
-title: "Misc"
+layout: base
+title: 杂项
+eyebrow: Misc
 description: "门与门之间崩落的宝石"
-header-img: "img/underconst.png"
-header-mask: 0.3
+cover: /img/underconst.png
 ---
 
-<!-- Page Header -->
-{% include intro-header.html type='page' %}
+{% include base/page-header.html %}
 
-<!-- Main Content -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-10 col-lg-offset-2 col-md-10 col-md-offset-2 col-xs-12">
-      <!-- misc list -->
-      <div class="misc-list js-result">
-        {%- assign _sorted_misc = site.misc | sort: 'date' | reverse -%}
- 
-        {%- for _miscky in _sorted_misc -%}
-          <div class="misc-preview-item row d-flex align-items-stretch">
-            <a href="{{ _miscky.url | prepend: site.baseurl }}">
-                <div class="col-lg-1  col-md-1 col-xs-2 " style="padding-left:0; padding-right:0;">
-                  {%- if _miscky.side-img -%}
-                    <img src="{{ site.baseurl }}/img/miscfaces/{{ _miscky.side-img }}" style="width: 65%; height: auto;">
-                    {% else %}
-                    <img src="{{ site.baseurl }}/img/miscfaces/colins-prototype.png" style="width: 65%; height: auto;">
-                  {%- endif -%}
-                </div>
-                <div class="col-lg-11 col-md-11 col-xs-10">
-                  <div class="misc-content-preview">
-                    {{ _miscky.content | strip_html | truncate:300 }}
-                  </div>
-                </div>
-            </a>
-          </div>
-          <p class="post-meta" style="font-size: 12px; margin-bottom:0 ;">
-            Posted by {% if _miscky.author %}{{ _miscky.author }}{% else %}{{ site.title }}{% endif %} on {{ _miscky.date | date: "%B %-d, %Y" }}
-        </p>
-        <div width = "100%"></div>
-            <hr style = "margin-top: 0;">
-          {%- if forloop.last -%}
-				{%- endif -%}
-        {%- endfor -%}
-      </div>   
+<section class="section">
+  <div class="container container--narrow">
+    {%- assign items = site.misc | sort: 'date' | reverse -%}
+
+    {%- if items.size > 0 %}
+    <div class="posts">
+      {%- for item in items %}
+      <a class="post-row" href="{{ item.url | relative_url }}" data-reveal>
+        <div class="post-row-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+        <div class="post-row-body">
+          <div class="post-row-title">{{ item.title | default: '杂项' }}</div>
+          <div class="post-row-sub">{{ item.content | strip_html | normalize_whitespace | truncate: 90 }}</div>
+        </div>
+        <div class="post-row-meta">{{ item.date | date: '%Y.%m.%d' }}</div>
+      </a>
+      {%- endfor %}
     </div>
+    {%- else %}
+    <p class="empty-state">还没有杂项。往 <code>_misc/</code> 里添加一个 Markdown 文件就会出现。</p>
+    {%- endif %}
   </div>
-</div>
+</section>

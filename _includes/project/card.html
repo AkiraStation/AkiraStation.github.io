@@ -1,0 +1,29 @@
+{%- assign w = include.work -%}
+<a class="card" href="{{ w.url | relative_url }}"
+   data-work
+   data-type="{{ w.type | default: '' }}"
+   data-year="{{ w.year | default: '' }}"
+   data-reveal>
+  <div class="card-media">
+    {%- assign thumb = w.thumb | default: w.cover -%}
+    {%- if thumb %}
+    <img class="card-thumb" src="{{ thumb | relative_url }}" alt="{{ w.title }}"
+         width="480" height="360" loading="lazy" decoding="async">
+    {%- endif %}
+  </div>
+  <div class="card-body">
+    <div class="card-meta">
+      {%- if w.type %}<span class="card-type">{{ w.type }}</span>{% endif %}
+      {%- if w.year %}<span>{{ w.year }}</span>{% endif %}
+    </div>
+    <h3 class="card-title">{{ w.title }}</h3>
+    {%- if w.summary %}
+    <p class="card-summary">{{ w.summary }}</p>
+    {%- endif %}
+  </div>
+  <span class="card-arrow" aria-hidden="true">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M7 17 17 7M9 7h8v8"></path>
+    </svg>
+  </span>
+</a>

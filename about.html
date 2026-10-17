@@ -1,47 +1,10 @@
 ---
-layout: default
-title: "About"
+layout: page
+title: About
+eyebrow: About
 description: "独自在门扉的另一侧，默哀世界的崩坏吧"
-header-img: "img/about_bg.jpg"
-header-mask: 0.3
-
+cover: /img/about_bg.jpg
 ---
 
-<!-- Page Header -->
-{% include intro-header.html type='page' %}
-
-<!-- Main Content -->
-<div class="container">
-  <div class="row">
-    
-    <!-- NO SIDEBAR -->
-    <!-- PostList Container -->
-    <div class="zh post-container">
-        {% capture about_zh %}{% include about/zh.md %}{% endcapture %}
-        {{ about_zh | markdownify }}
-    </div>
-   
-  </div>
-</div>
-
-{% if site.page-mathjax %}
-<!-- Add support for Mathjax by Voleking-->
-<!-- If you want to see formulars well in post preview, Maybe you should add this.-->
-<!-- However, most of the time formulars may not appear in the post preview, you can delete it.-->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    TeX: {
-      equationNumbers: {
-        autoNumber: "AMS"
-      }
-    },
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true,
-    }
-  });
-</script>
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-{% endif %}
+{%- capture about_zh %}{% include about/zh.md %}{% endcapture -%}
+{{ about_zh | markdownify }}

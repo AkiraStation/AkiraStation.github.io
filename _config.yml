@@ -1,59 +1,47 @@
-# Site settings
+# ============================================================
+# 站点配置 — AkiraStation
+# ------------------------------------------------------------
+# 构建方式：GitHub Pages 经典构建（Jekyll 3.10.0，无自定义 Ruby 插件）
+# 内容类型：
+#   _posts/     文章（随笔、长文）
+#   _projects/  项目与作品（一等公民，独立 URL）
+#   _misc/      杂项
+# 主页与各区块的文案/图片：_data/home.yml（改内容不用动模板）
+# 样式：css/site.css（纯 CSS 设计系统，无 Bootstrap）
+# 交互：js/site.js（原生 JS，无 jQuery）
+# ============================================================
+
+# ---- 站点标识 ----
 title: AkiraStation
 SEOTitle: Therefore, you refused my connection.
-header-img: img/default_header.jpg
-email: akiras_connect@outlook.com
 description: "这里是Akiras的博客与画作的静态备份 | Here lies the blog and artwork of Akiras"
-# keyword: "关键词1, 关键词2"  # 用于 <meta name="keywords">；注释掉或留空则不输出该标签
-url: "https://AkiraStation.github.io" # your host, for absolute URL
-baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
+url: "https://AkiraStation.github.io"
+baseurl: ""
+email: akiras_connect@outlook.com
 
-# Publish posts or collection documents with a future date.
+# 页面未指定 cover / header-img 时的缺省头图
+header-img: img/default_header.jpg
+
+# 有值才会输出 <meta name="keywords">
+# keyword: "关键词1, 关键词2"
+
+# 浏览器标签栏主题色（与 css/site.css 的 --bg 保持一致）
+chrome-tab-theme-color: "#0b0c0f"
+
+# 缺省分享图 / og:image 回退
+sidebar-avatar: img/sidebar_avatar.jpg
+
+# ---- 发布 ----
+# 允许发布日期晚于构建时刻的文章
 future: true
 
-# SNS settings
-RSS: false
-#weibo_username: huxpro
-#zhihu_username: huxpro
-#github_username: huxpro
-#twitter_username: _Akiras_
-#facebook_username:  huxpro
-#linkedin_username:  firstname-lastname-idxxxx
-#bilibili_uid: 4175639
-#wilddream_username: akirame
-
-# Build settings
-# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
+# ---- 构建 ----
 highlighter: rouge
 permalink: pretty
-paginate: 10
-exclude:
-  [
-    "less",
-    "node_modules",
-    "Gruntfile.js",
-    "package.json",
-    "README.md",
-    "README.zh.md",
-    "RESOURCE_CHECKLIST.md",
-  ]
-anchorjs: true # if you want to customize anchor. check out line:181 of `post.html`
-# If you have timezone issue (e.g. #68) in China, uncomment to use this:
-#timezone: CN
 
-# Gems
-# from PR#40, to support local preview for Jekyll 3.0
-# make sure you have this gem installed
-# `$ gem install jekyll-paginate`
-plugins: [jekyll-paginate]
-
-# Markdown settings
-# replace redcarpet to kramdown,
-# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
-# document: http://jekyllrb.com/docs/configuration/#kramdown
 markdown: kramdown
 kramdown:
-  input: GFM # use Github Flavored Markdown !important
+  input: GFM
   syntax_highlighter_opts:
     span:
       line_numbers: false
@@ -61,45 +49,47 @@ kramdown:
       line_numbers: true
       start_line: 1
 
-# Disqus settings
-# disqus_username: hux
-
-# Netease settings
-netease_comment: false
-
-# Analytics settings
-# Baidu Analytics
-# ba_track_id: [your track id]
-
-# Google Analytics
-#ga_track_id: "UA-49627206-1" # Format: UA-xxxxxx-xx
-#ga_domain: huangxuan.me
-
-# Sidebar settings
-sidebar: true # whether or not using Sidebar.
-sidebar-about-description: "Therefore, you refused my connection."
-sidebar-avatar: 'img/sidebar_avatar.jpg' # use absolute URL, seeing it's used in both `/` and `/about/`
-
-# Featured Tags
-featured-tags: true # whether or not using Feature-Tags
-featured-condition-size: 1 # A tag will be featured if the size of it is more than this condition value
-
-# Progressive Web Apps
-chrome-tab-theme-color: "#a2bcf1"
-service-worker: true
-
-# MathJax rendering for layout:page (e.g. post preview)
-page-mathjax: true
-
-# Friends
-#friends:
-#  [
-#    { title: "Connection awaits", href: "127.0.0.1" },
-#  ]
-friends:
-  [
-  
-  ]
+# ---- 内容集合 ----
 collections:
   misc:
     output: true
+  # 项目/作品：与 _posts 解耦的一等公民内容类型。
+  # 每个文档自动生成独立页面，URL 由各自的 permalink 决定。
+  projects:
+    output: true
+
+# 集合默认值：_projects 下的文档自动套用项目详情布局，
+# 每个项目文件只需写内容字段，不必重复 layout。
+defaults:
+  - scope:
+      type: projects
+    values:
+      layout: project
+
+# ---- 渐进式 Web 应用 ----
+# 开启后 base 布局会加载 js/snackbar.js 与 js/sw-registration.js，
+# 由根目录 sw.js 提供离线缓存。预缓存清单见 sw.js 的 PRECACHE_LIST。
+service-worker: true
+
+# ---- 不会发布到站点的文件 ----
+# 注意：Jekyll 的 exclude 会替换默认值，所以 Gemfile / vendor 等需要显式列出。
+exclude:
+  - README.md
+  - RESOURCE_CHECKLIST.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .bundle
+
+# ------------------------------------------------------------
+# 已移除的旧主题配置（留档说明，避免以后误加回来）：
+#   paginate / plugins: jekyll-paginate  → 首页与文字页改为直接遍历，不再分页
+#   anchorjs: true                       → 标题锚点改为 js/site.js 原生实现
+#   page-mathjax: true                   → 改为按页启用：front matter 写 mathjax: true
+#   netease_comment / disqus_username     → 已无对应模板，删除
+#   sidebar / sidebar-about-description   → 旧侧栏组件已删除（文案见 _data/home.yml）
+#   featured-tags / featured-condition-size → 旧标签云组件已删除
+#   friends                              → 旧友链组件已删除
+#   RSS                                  → 页脚始终提供 /feed.xml 入口
+#   ga_track_id / ba_track_id            → 新外壳不再内置统计脚本，需要时请自行加回
+# ------------------------------------------------------------

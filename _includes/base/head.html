@@ -1,0 +1,42 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+
+  {%- assign page_title = page.title | default: site.SEOTitle -%}
+  {%- assign page_desc = page.description | default: page.summary | default: site.description -%}
+
+  <title>{{ page_title }} · {{ site.title }}</title>
+  <meta name="description" content="{{ page_desc | strip_html | normalize_whitespace | truncate: 180 }}">
+
+  <link rel="canonical" href="{{ page.url | replace: 'index.html', '' | absolute_url }}">
+  <link rel="shortcut icon" href="{{ '/img/favicon.ico' | relative_url }}">
+
+  <!-- 新前端样式：不含 Bootstrap，不依赖 jQuery -->
+  <link rel="stylesheet" href="{{ '/css/site.css' | relative_url }}">
+
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
+
+  <!-- Open Graph -->
+  {%- if page.cover or page['header-img'] -%}
+    {%- assign og_image = page.cover | default: page['header-img'] -%}
+  {%- else -%}
+    {%- assign og_image = site['sidebar-avatar'] -%}
+  {%- endif -%}
+  <meta property="og:type" content="{% if page.layout == 'project' %}article{% else %}website{% endif %}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:description" content="{{ page_desc | strip_html | normalize_whitespace | truncate: 180 }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  {%- if og_image %}
+  <meta property="og:image" content="{{ og_image | prepend: '/' | replace: '//', '/' | absolute_url }}">
+  {%- endif %}
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="theme-color" content="#0b0c0f">
+
+  {%- if page.layout == 'project' %}
+  <meta property="article:published_time" content="{{ page.date | date: '%Y-%m-%dT%H:%M:%SZ' }}">
+  {%- if page.author %}<meta property="article:author" content="{{ page.author }}">{% endif %}
+  {%- endif %}
+</head>

@@ -1,0 +1,30 @@
+{%- assign g = site.data.home.gallery_section -%}
+{%- if g.images and g.images.size > 0 %}
+<section class="section">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div>
+        <p class="section-eyebrow">{{ g.eyebrow | default: 'Gallery' }}</p>
+        <h2 class="section-title">{{ g.title | default: '画作图墙' }}</h2>
+        {%- if g.subtitle %}
+        <p class="section-sub">{{ g.subtitle }}</p>
+        {%- endif %}
+      </div>
+    </div>
+
+    <div class="wall">
+      <div class="wall-track">
+        {%- for img in g.images %}
+        <a class="wall-item" href="{{ img.url | relative_url }}">
+          <img src="{{ img.src | relative_url }}" alt="{{ img.caption }}"
+               loading="lazy" decoding="async">
+          {%- if img.caption %}
+          <span class="wall-caption">{{ img.caption }}</span>
+          {%- endif %}
+        </a>
+        {%- endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif %}

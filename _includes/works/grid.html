@@ -1,0 +1,17 @@
+{%- comment -%}
+  作品网格：遍历 site.projects（按日期倒序）。
+  卡片字段见 _projects/*.md 的 front matter。
+{%- endcomment -%}
+{%- assign works = site.projects | sort: 'date' | reverse -%}
+
+{%- if works.size > 0 %}
+<div class="works-grid">
+  {%- for work in works %}
+  {% include project/card.html work=work %}
+  {%- endfor %}
+</div>
+{%- else %}
+<p class="empty-state">还没有项目，往 <code>_projects/</code> 里添加一个 Markdown 文件就会出现。</p>
+{%- endif %}
+
+<p class="empty-state" data-filter-empty hidden>没有符合当前筛选条件的项目。</p>
