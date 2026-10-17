@@ -17,9 +17,11 @@
     </div>
 
     <div class="posts">
+      {%- assign shown = 0 -%}
       {%- for post in site.posts limit: n %}{% unless post.hidden %}
+      {%- assign shown = shown | plus: 1 -%}
       <a class="post-row" href="{{ post.url | relative_url }}" data-reveal>
-        <div class="post-row-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+        <div class="post-row-num">{{ shown | prepend: '0' | slice: -2, 2 }}</div>
         <div class="post-row-body">
           <div class="post-row-title">{{ post.title }}</div>
           {%- if post.subtitle %}

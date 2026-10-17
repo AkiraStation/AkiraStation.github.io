@@ -67,3 +67,20 @@
 | 改整体配色、字号、间距 | `css/site.css` 顶部的 `:root` 设计令牌 |
 | 切换浅色主题 | 把 `<html data-theme="dark">` 改成 `data-theme="light"`（`_layouts/base.html`） |
 | 首页不显示某篇文字 | 该文 front matter 写 `hidden: true` |
+
+---
+
+## 七、推送前自检（不需要装 Ruby）
+
+本机没有 Ruby，无法本地 `jekyll build`；但有两类错误会让 GitHub Pages **整个构建失败**（站点直接报错），
+所以这里放了两个零依赖的 Node 自检脚本，推送前跑一遍即可（在仓库根目录执行）：
+
+```bash
+node scripts/lint-liquid.js .   # Liquid 块标签嵌套（能抓 {% if %}…{% endfor %} 这类错序）
+node scripts/lint-yaml.js .     # front matter / _config.yml / _data 的 YAML 子集校验
+```
+
+`lint-yaml.js` 会检查：制表符缩进、顶层重复键、值里未加引号的「冒号+空格」、引号未闭合、
+以及 **文件 BOM**（front matter 前带 BOM 会让 Jekyll 认不出它）。
+
+两个脚本都在 `_config.yml` 的 `exclude` 里，不会被发布到站点上。
