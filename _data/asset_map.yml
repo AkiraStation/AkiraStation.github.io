@@ -1,0 +1,19 @@
+# ============================================================
+# 优化版图片 -> 原始分辨率图 的映射
+# ------------------------------------------------------------
+# 页面默认加载 img/opt/ 下的优化版（体积小得多）；点击右下角
+# 「加载完整资源」按钮时，前端会用这里映射的原始图替换掉它们。
+# 原图全部保留在仓库里，没有被覆盖。
+#
+# 新增优化版后记得在这里补一行，否则该图不会出现在「完整资源」里。
+# ============================================================
+
+"/img/opt/default_header.jpg":    "/img/default_header.jpg"
+"/img/opt/breached_ashens.jpg":   "/img/breached_ashens.png"
+"/img/opt/projects_bg.jpg":       "/img/projects_bg.jpg"
+"/img/opt/1t2f.jpg":              "/img/shrine/1t2f.jpg"
+"/img/opt/summer_compressed.jpg": "/img/shrine/summer_compressed.jpg"
+"/img/opt/clog_compressed.jpg":   "/img/shrine/clog_compressed.jpg"
+"/img/opt/bprint_compressed.jpg": "/img/shrine/bprint_compressed.jpg"
+"/img/opt/tokenize_bb.jpg":       "/img/shrine/tokenize_bb.jpg"
+"/img/opt/bcard_compressed.jpg":  "/img/shrine/bcard_compressed.jpg"

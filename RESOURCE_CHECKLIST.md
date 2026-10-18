@@ -49,6 +49,8 @@
 
 ## 五、仍需你决定的事项
 
+- **图片已做优化版**：页面默认加载 `img/opt/`（首页 749 KB，优化前 ~2776 KB）；`img/` 下的原图
+  **一张未改**，通过右下角「加载完整资源」按钮按需加载，映射表见 `_data/asset_map.yml`。
 - **未被引用的图片**（我没有删除，因为属于你的作品素材）：`img/Credence.jpg`（1.85 MB，实际是 PNG 格式却用了 `.jpg` 后缀）、`img/miscfaces/test.jpg`。`img/smol/*` 与 `img/shrine/*` 现在都已正常使用（项目卡片 / 详情页大图）。
 - **`Gemfile` 已改为 `gem "github-pages"`**，与线上 Jekyll 3.10.0 对齐。⚠️ 本机未安装 Ruby，**无法代为验证** `bundle install` 是否顺利；若你以后要在本地预览，这一步需要你自己跑一次。
 - **`hidden: true` 的语义**（现已写进代码）：只影响**首页「近作」**区块；文字页 `fblogs`、`search.json`、`feed.xml` 仍会收录。要让某篇在**全站**消失，请用 Jekyll 原生的 `published: false`。
@@ -65,6 +67,7 @@
 | 新增一篇文字 | 在 `_posts/` 新建 `YYYY-MM-DD-slug.md`，`layout: post` |
 | 改首页 Hero 文案 / 图墙图片 / 区块标题 | `_data/home.yml` |
 | 改整体配色、字号、间距 | `css/site.css` 顶部的 `:root` 设计令牌 |
+| 新增一张图片的优化版 | 文件放 img/opt/，并在 _data/asset_map.yml 补「优化版 → 原图」映射 |
 | 切换浅色主题 | 把 `<html data-theme="dark">` 改成 `data-theme="light"`（`_layouts/base.html`） |
 | 首页不显示某篇文字 | 该文 front matter 写 `hidden: true` |
 

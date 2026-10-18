@@ -9,7 +9,7 @@ hero:
   eyebrow: "AkiraStation"
   title: "只剩下无尽的门扉"
   subtitle: "这里是 Akiras 的博客与画作的静态备份。项目、画作与文字，各自成列。"
-  image: "/img/default_header.jpg"
+  image: "/img/opt/default_header.jpg"
   # Hero 遮罩强度（0–1），配合深色主题使用
   mask: 0.55
   cta:
@@ -40,19 +40,19 @@ gallery_section:
   title: "画作图墙"
   subtitle: "横向滑动查看更多"
   images:
-    - src: "/img/shrine/summer_compressed.jpg"
+    - src: "/img/opt/summer_compressed.jpg"
       caption: "浅滩之夏"
       url: "/2023/09/04/project_summer/"
-    - src: "/img/shrine/clog_compressed.jpg"
+    - src: "/img/opt/clog_compressed.jpg"
       caption: "纪念作"
       url: "/2020/01/01/project_clog/"
-    - src: "/img/shrine/bprint_compressed.jpg"
+    - src: "/img/opt/bprint_compressed.jpg"
       caption: "蓝图垫"
       url: "/2024/05/06/project_blueprint/"
-    - src: "/img/shrine/tokenize_bb.jpg"
+    - src: "/img/opt/tokenize_bb.jpg"
       caption: "代币"
       url: "/2025/10/29/project_token/"
-    - src: "/img/shrine/bcard_compressed.jpg"
+    - src: "/img/opt/bcard_compressed.jpg"
       caption: "个人名片"
       url: "/2022/08/06/project_bcard/"
 

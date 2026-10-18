@@ -50,7 +50,7 @@ function checkYamlBlock(rel, lines, startLine) {
     const isList = /^\s*-(\s|$)/.test(noComment);
 
     // 键值行
-    const kv = /^(\s*)([A-Za-z_][\w.-]*):(?:\s+(.*))?$/.exec(noComment);
+    const kv = /^(\s*)(?:"([^"]*)"|'([^']*)'|([A-Za-z_][\w.-]*)):(\s+(.*))?$/.exec(noComment);
     if (!isList && !kv) {
       // 可能是缩进映射的纯键、或列表项的续行
       const bare = /^(\s*)([A-Za-z_][\w.-]*):\s*$/.exec(noComment);
@@ -61,8 +61,9 @@ function checkYamlBlock(rel, lines, startLine) {
     }
 
     if (kv) {
-      const key = kv[2];
-      const value = (kv[3] || '').trim();
+      // 键可以是裸键、双引号键或单引号键
+      const key = kv[2] || kv[3] || kv[4];
+      const value = (kv[5] || '').trim();
       if (indent === 0) {
         if (seenTopKeys.has(key)) {
           fail(rel, lineNo, `顶层键重复：${key}（首次出现在第 ${seenTopKeys.get(key)} 行）`);

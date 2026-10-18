@@ -1,7 +1,8 @@
 {%- assign h = site.data.home.hero -%}
+{%- assign hero_full = site.data.asset_map[h.image] -%}
 <section class="hero">
   {%- if h.image %}
-  <img class="hero-media" src="{{ h.image | relative_url }}" alt=""
+  <img class="hero-media" src="{{ h.image | relative_url }}" alt=""{% if hero_full %} data-full-src="{{ hero_full | relative_url }}"{% endif %}
        fetchpriority="high" decoding="async">
   {%- endif %}
   <div class="hero-scrim" style="--hero-mask: {{ h.mask | default: 0.55 }}"></div>

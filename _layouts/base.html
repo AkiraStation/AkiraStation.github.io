@@ -12,6 +12,11 @@
   {% include base/footer.html %}
   {% include base/search.html %}
 
+  <div class="asset-quality" data-asset-quality hidden>
+    <button type="button" class="asset-quality-btn" aria-pressed="false"
+            title="加载原始分辨率的图片（体积会明显变大）">加载完整资源</button>
+  </div>
+
   <script src="{{ '/js/site.js' | relative_url }}" defer></script>
 
   {%- if site.service-worker %}

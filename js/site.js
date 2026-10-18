@@ -274,6 +274,99 @@
     });
   }
 
+  /* -- 7. 加载完整分辨率资源（把 img/opt 换回原图） ----------------------- */
+  function initFullAssets() {
+    var imgs = Array.prototype.slice.call(document.querySelectorAll('img[data-full-src]'));
+    var covers = Array.prototype.slice.call(document.querySelectorAll('[data-full-cover]'));
+    var wrap = document.querySelector('[data-asset-quality]');
+    var total = imgs.length + covers.length;
+    if (!wrap || !total) return;
+
+    var btn = wrap.querySelector('button');
+    var key = 'akira:full-assets';
+    var active = false;
+
+    function swapImages(on) {
+      imgs.forEach(function (img) {
+        if (on) {
+          if (!img.getAttribute('data-src-standard')) {
+            img.setAttribute('data-src-standard', img.getAttribute('src'));
+          }
+          img.setAttribute('src', img.getAttribute('data-full-src'));
+        } else {
+          var std = img.getAttribute('data-src-standard');
+          if (std) img.setAttribute('src', std);
+        }
+      });
+    }
+
+    function swapCovers(on) {
+      covers.forEach(function (el) {
+        if (on) {
+          if (!el.getAttribute('data-cover-standard')) {
+            el.setAttribute('data-cover-standard', el.style.getPropertyValue('--cover'));
+          }
+          el.style.setProperty('--cover', 'url(' + el.getAttribute('data-full-cover') + ')');
+        } else {
+          var std = el.getAttribute('data-cover-standard');
+          if (std) el.style.setProperty('--cover', std);
+        }
+      });
+    }
+
+    function sync() {
+      btn.setAttribute('aria-pressed', String(active));
+      btn.textContent = active ? '还原标准画质' : '加载完整资源 · ' + total + ' 张';
+    }
+
+    function persist() {
+      try {
+        if (active) sessionStorage.setItem(key, '1');
+        else sessionStorage.removeItem(key);
+      } catch (e) { /* 隐私模式忽略 */ }
+    }
+
+    function switchTo(on) {
+      active = on;
+      swapImages(on);
+      swapCovers(on);
+      sync();
+      persist();
+    }
+
+    btn.addEventListener('click', function () {
+      if (active) { switchTo(false); return; }
+
+      // 先把原图拉进缓存再换，避免切换瞬间出现空白
+      var queue = [];
+      imgs.forEach(function (i) { queue.push(i.getAttribute('data-full-src')); });
+      covers.forEach(function (c) { queue.push(c.getAttribute('data-full-cover')); });
+
+      btn.disabled = true;
+      btn.textContent = '正在加载原图…';
+
+      var pending = queue.length;
+      function one() {
+        if (--pending > 0) return;
+        btn.disabled = false;
+        switchTo(true);
+      }
+      if (!pending) { btn.disabled = false; switchTo(true); return; }
+      queue.forEach(function (src) {
+        var probe = new Image();
+        probe.onload = one;
+        probe.onerror = one;   // 原图缺失也要恢复按钮状态
+        probe.src = src;
+      });
+    });
+
+    wrap.hidden = false;
+    sync();
+
+    var saved = false;
+    try { saved = sessionStorage.getItem(key) === '1'; } catch (e) { /* 忽略 */ }
+    if (saved) { active = true; swapImages(true); swapCovers(true); sync(); }
+  }
   /* -- 启动 --------------------------------------------------------------- */
   function boot() {
     initNav();
@@ -282,6 +375,7 @@
     initSearch();
     initAnchors();
     initReveal();
+    initFullAssets();
   }
 
   if (document.readyState === 'loading') {

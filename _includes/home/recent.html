@@ -32,5 +32,8 @@
       </a>
       {%- endunless %}{% endfor %}
     </div>
+    {%- if shown == 0 %}
+    <p class="empty-state">还没有文章。等第一篇写下之后，它会出现在这里。</p>
+    {%- endif %}
   </div>
 </section>

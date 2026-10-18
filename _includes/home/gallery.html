@@ -16,7 +16,8 @@
       <div class="wall-track">
         {%- for img in g.images %}
         <a class="wall-item" href="{{ img.url | relative_url }}">
-          <img src="{{ img.src | relative_url }}" alt="{{ img.caption }}"
+          {%- assign item_full = site.data.asset_map[img.src] -%}
+          <img src="{{ img.src | relative_url }}" alt="{{ img.caption }}"{% if item_full %} data-full-src="{{ item_full | relative_url }}"{% endif %}
                loading="lazy" decoding="async">
           {%- if img.caption %}
           <span class="wall-caption">{{ img.caption }}</span>

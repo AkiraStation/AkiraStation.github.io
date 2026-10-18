@@ -4,9 +4,10 @@
 {%- endcomment -%}
 {%- assign eyebrow = include.eyebrow | default: page.eyebrow -%}
 {%- assign cover = page.cover | default: page['header-img'] -%}
+{%- assign cover_full = site.data.asset_map[cover] -%}
 
 <header class="page-header{% if cover %} page-header--media{% endif %}"
-  {%- if cover %} style="--cover: url('{{ cover | relative_url }}')"{% endif %}>
+  {%- if cover %} style="--cover: url('{{ cover | relative_url }}')"{% endif %}{% if cover_full %} data-full-cover="{{ cover_full | relative_url }}"{% endif %}>
   <div class="container container--narrow">
     {%- if eyebrow %}
     <p class="section-eyebrow">{{ eyebrow }}</p>

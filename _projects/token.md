@@ -5,15 +5,15 @@ date: 2025-10-29 09:05
 author: Akiras
 year: 2025
 type: 周边
-cover: /img/shrine/tokenize_bb.jpg
+cover: /img/opt/tokenize_bb.jpg
 thumb: /img/smol/token_smol.jpg
 summary: 用 a1 打印机一体成型的、一元硬币大小的代币。
 tools:
   - a1 打印机
   - PVA 可溶耗材
 gallery:
-  - /img/shrine/tokenize_bb.jpg
-  - /img/shrine/1t2f.jpg
+  - /img/opt/tokenize_bb.jpg
+  - /img/opt/1t2f.jpg
 tags:
   - 周边
   - 项目

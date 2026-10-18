@@ -10,7 +10,8 @@ layout: base
 <article class="project">
   <div class="project-hero">
     {%- if page.cover %}
-    <img class="project-cover" src="{{ page.cover | relative_url }}" alt="{{ page.title }}"
+    {%- assign cover_full = site.data.asset_map[page.cover] -%}
+    <img class="project-cover" src="{{ page.cover | relative_url }}" alt="{{ page.title }}"{% if cover_full %} data-full-src="{{ cover_full | relative_url }}"{% endif %}
          fetchpriority="high" decoding="async">
     {%- endif %}
     <div class="container">
@@ -52,7 +53,8 @@ layout: base
     {%- if page.gallery and page.gallery.size > 0 %}
     <div class="project-gallery">
       {%- for shot in page.gallery %}
-      <img src="{{ shot | relative_url }}" alt="{{ page.title }} 图片 {{ forloop.index }}"
+      {%- assign shot_full = site.data.asset_map[shot] -%}
+      <img src="{{ shot | relative_url }}" alt="{{ page.title }} 图片 {{ forloop.index }}"{% if shot_full %} data-full-src="{{ shot_full | relative_url }}"{% endif %}
            loading="lazy" decoding="async">
       {%- endfor %}
     </div>

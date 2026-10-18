@@ -5,11 +5,11 @@ date: 2023-09-04 00:00
 author: Akiras at the shallows
 year: 2023
 type: 画作
-cover: /img/shrine/summer_compressed.jpg
+cover: /img/opt/summer_compressed.jpg
 thumb: /img/smol/summer_smol.jpg
 summary: 追随着他的脚步，晨星来到了眩目的夏日。
 gallery:
-  - /img/shrine/summer_compressed.jpg
+  - /img/opt/summer_compressed.jpg
 tags:
   - 补档
   - 画作

@@ -81,6 +81,23 @@ permalink: /2025/10/29/project_token/   # 可选；省略则用 /projects/<文�
 **改配色/字号/间距** —— 只改 `css/site.css` 顶部的 `:root` 设计令牌。切浅色主题把
 `_layouts/base.html` 里的 `<html data-theme="dark">` 改成 `light`。
 
+## 图片：优化版与原图
+
+页面默认加载 `img/opt/` 下的**优化版**（体积小一个数量级），**原始分辨率图全部保留**在 `img/` 下、一张都没被覆盖：
+
+| 位置 | 默认加载 | 原图 |
+|---|---|---|
+| 首页 Hero | `img/opt/default_header.jpg` **129 KB** | `img/default_header.jpg` 1850 KB |
+| token 图集 | `img/opt/1t2f.jpg` **125 KB** | `img/shrine/1t2f.jpg` 4283 KB |
+| 项目图墙（5 张） | `img/opt/*_compressed.jpg` 共 **512 KB** | `img/shrine/*` 共 817 KB |
+| `/projects/` 页头 | `img/opt/projects_bg.jpg` **58 KB** | `img/projects_bg.jpg` 560 KB |
+
+右下角的 **「加载完整资源」** 按钮，会把当前页面所有图片换成原图：它会先把原图拉进缓存再切换
+（避免大图切换时闪白），按钮显示为「还原标准画质」可切回；选择记在 `sessionStorage`，
+同一浏览会话内翻页保持。图片加载失败也会恢复按钮状态，不会卡住。
+
+**新增一张优化版**：把压缩后的文件放进 `img/opt/`，然后在 `_data/asset_map.yml` 里补一行
+「优化版路径 → 原图路径」，该页面的按钮就会自动把它算进可切换的图里（没有映射的图不会出现在按钮里）。
 ## 本地预览
 
 本机需要 Ruby。`Gemfile` 已对齐线上的 `github-pages` gem：

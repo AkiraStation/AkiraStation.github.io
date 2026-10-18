@@ -20,7 +20,7 @@ baseurl: ""
 email: akiras_connect@outlook.com
 
 # 页面未指定 cover / header-img 时的缺省头图
-header-img: img/default_header.jpg
+header-img: /img/opt/default_header.jpg
 
 # 有值才会输出 <meta name="keywords">
 # keyword: "关键词1, 关键词2"

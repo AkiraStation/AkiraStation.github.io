@@ -5,11 +5,11 @@ date: 2020-01-01 00:00
 author: Colins by the shallows
 year: 2020
 type: 画作
-cover: /img/shrine/clog_compressed.jpg
+cover: /img/opt/clog_compressed.jpg
 thumb: /img/smol/clog_smol.jpg
 summary: 一幅对我具有重要纪念意义的画作 —— 当时水平还很菜，但尽力完成了。
 gallery:
-  - /img/shrine/clog_compressed.jpg
+  - /img/opt/clog_compressed.jpg
 tags:
   - 补档
   - 画作
