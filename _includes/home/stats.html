@@ -1,7 +1,16 @@
-{%- assign works = site.projects | sort: 'date' -%}
-{%- assign y_first = works.first.date | date: '%Y' | times: 1 -%}
-{%- assign y_last = works.last.date | date: '%Y' | times: 1 -%}
-{%- assign span = y_last | minus: y_first | plus: 1 -%}
+{%- assign works = site.projects -%}
+
+{%- comment -%}
+  标签个数：把项目与文章的标签汇总去重。
+  GitHub Pages 经典构建没有自定义插件，所以用 Liquid 手工汇总：
+  用 "|" 拼接后 split + uniq，末尾会多出一个空串，故减 1。
+{%- endcomment -%}
+{%- assign raw_tags = '' -%}
+{%- for w in site.projects -%}{%- for t in w.tags -%}{%- assign raw_tags = raw_tags | append: t | append: '|' -%}{%- endfor -%}{%- endfor -%}
+{%- for p in site.posts -%}{%- for t in p.tags -%}{%- assign raw_tags = raw_tags | append: t | append: '|' -%}{%- endfor -%}{%- endfor -%}
+{%- assign tag_list = raw_tags | split: '|' | uniq -%}
+{%- assign tag_count = 0 -%}
+{%- if raw_tags != '' -%}{%- assign tag_count = tag_list.size | minus: 1 -%}{%- endif -%}
 
 <section class="stats">
   <div class="container">
@@ -14,16 +23,10 @@
         <div class="stat-value">{{ site.posts.size }}<span>.</span></div>
         <div class="stat-label">文字</div>
       </div>
-      {%- if works.size > 0 %}
       <div class="stat">
-        <div class="stat-value">{{ span }}<span> 年</span></div>
-        <div class="stat-label">创作跨度</div>
+        <div class="stat-value">{{ tag_count }}<span>.</span></div>
+        <div class="stat-label">标签种类</div>
       </div>
-      <div class="stat">
-        <div class="stat-value">{{ y_first }}<span>–</span>{{ y_last }}</div>
-        <div class="stat-label">时间线</div>
-      </div>
-      {%- endif %}
     </div>
   </div>
 </section>

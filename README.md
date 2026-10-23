@@ -15,10 +15,10 @@ Akiras 的个人站点：项目与作品、画作、文字。
 ```
 _posts/         文章（随笔、长文）      layout: post
 _projects/      项目与作品（一等公民）  layout: project
-_misc/          杂项                    layout: misc
+
 _data/home.yml  主页与各区块的文案、图墙、数量配置
 
-_layouts/       base(外壳) / home(主页) / project / project-index / post / page / misc
+_layouts/       base(外壳) / home(主页) / project / project-index / post / page
 _includes/
   base/         head、nav、footer、page-header、search、mathjax
   home/         hero、stats、projects、recent、gallery（主页六个区块）
@@ -34,19 +34,19 @@ sw.js           离线缓存（预缓存清单见文件内 PRECACHE_LIST）
 index.html      主页（layout: home）
 projects.html   项目索引（layout: project-index）
 fblogs.html     文字索引（按年份分组）
-about.html / misc.html / 404.html / offline.html
+about.html / 404.html / offline.html
 search.json     站内搜索索引（文章 + 项目合并）
 feed.xml        RSS
 scripts/        推送前自检脚本（不参与构建）
 ```
 
-## 三种内容类型的区别
+## 两种内容类型的区别
 
 | | 放哪里 | URL | 出现在 |
 |---|---|---|---|
 | 文章 | `_posts/YYYY-MM-DD-slug.md` | `/YYYY/MM/DD/slug/` | 主页「近作」、文字页、搜索、RSS |
 | 项目 | `_projects/<name>.md` | 由 front matter 的 `permalink` 决定 | 主页作品网格、项目索引、搜索 |
-| 杂项 | `_misc/<name>.md` | `/misc/<name>/` | 杂项页 |
+
 
 项目是最重要的区别：它**不再借用 post**，有独立布局、独立字段与独立索引页。
 历史遗留的 5 个项目用 `permalink` 保留了旧的文章 URL，所以外链不会失效。

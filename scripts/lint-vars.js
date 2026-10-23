@@ -145,7 +145,7 @@ function lineAt(src, index) {
 const LIQUID_PROPS = new Set(['size', 'length', 'first', 'last']);
 
 /** 设计上允许「没有内容使用」的可选页面键（模板里用 if 守卫） */
-const OPTIONAL_PAGE_KEYS = new Set(['mathjax']);
+const OPTIONAL_PAGE_KEYS = new Set(['mathjax', 'header-img']);
 
 /** 在 home.yml 树里按路径查找，返回 {ok, node} */
 function lookup(tree, segments) {
@@ -275,7 +275,7 @@ for (const file of templates) {
       const rootName = bm[1];
       const key = bm[2];
       if (rootName === 'page' && /^[a-z][\w-]*$/.test(key)) {
-        if (!pageKeys.has(key) && !BUILTIN_PAGE.has(key)) {
+        if (!pageKeys.has(key) && !BUILTIN_PAGE.has(key) && !OPTIONAL_PAGE_KEYS.has(key)) {
           err(rel, line, `page['${key}'] 在所有 front matter 里都没出现过`);
         }
       }

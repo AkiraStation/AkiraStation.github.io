@@ -5,7 +5,6 @@
 # 内容类型：
 #   _posts/     文章（随笔、长文）
 #   _projects/  项目与作品（一等公民，独立 URL）
-#   _misc/      杂项
 # 主页与各区块的文案/图片：_data/home.yml（改内容不用动模板）
 # 样式：css/site.css（纯 CSS 设计系统，无 Bootstrap）
 # 交互：js/site.js（原生 JS，无 jQuery）
@@ -51,8 +50,6 @@ kramdown:
 
 # ---- 内容集合 ----
 collections:
-  misc:
-    output: true
   # 项目/作品：与 _posts 解耦的一等公民内容类型。
   # 每个文档自动生成独立页面，URL 由各自的 permalink 决定。
   projects:

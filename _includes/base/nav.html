@@ -10,22 +10,19 @@
 
       <nav class="nav-links" data-nav-links aria-label="主导航">
         {%- comment -%}
-          高亮当前页：优先用 layout 判断（项目/杂项/文章详情页的 URL 不含栏目名），
+          高亮当前页：优先用 layout 判断（项目/文章详情页的 URL 不含栏目名），
           再用 URL 判断栏目索引页。
         {%- endcomment -%}
         {%- assign current = page.url | replace: 'index.html', '' -%}
         {%- assign is_project = false -%}
-        {%- assign is_misc = false -%}
         {%- assign is_writing = false -%}
         {%- if page.layout == 'project' or page.layout == 'project-index' -%}{%- assign is_project = true -%}{%- endif -%}
-        {%- if page.layout == 'misc' -%}{%- assign is_misc = true -%}{%- endif -%}
         {%- if page.layout == 'post' -%}{%- assign is_writing = true -%}{%- endif -%}
 
         <a class="nav-link{% if current == '/' %} is-active{% endif %}" href="{{ '/' | relative_url }}">首页</a>
         <a class="nav-link{% if is_project or current contains '/projects/' %} is-active{% endif %}" href="{{ '/projects/' | relative_url }}">项目</a>
         <a class="nav-link{% if is_writing or current contains '/fblogs/' %} is-active{% endif %}" href="{{ '/fblogs/' | relative_url }}">文字</a>
         <a class="nav-link{% if current contains '/about/' %} is-active{% endif %}" href="{{ '/about/' | relative_url }}">关于</a>
-        <a class="nav-link{% if is_misc or current contains '/misc/' %} is-active{% endif %}" href="{{ '/misc/' | relative_url }}">杂项</a>
       </nav>
 
       <button class="nav-search" type="button" data-search-open aria-label="搜索">
