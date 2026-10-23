@@ -2,19 +2,25 @@
 title: 补档周边-个人名片
 subtitle: bcard
 date: 2022-08-06 18:44
-author: Colins
 year: 2022
 type: 周边
+view: product
+status: 已完成
+series: backfill
+series_name: 补档
+order: 40
+featured: true
+author: Colins
 cover: /img/opt/bcard_compressed.jpg
 thumb: /img/smol/bcard_smol.jpg
 summary: 为参加极兽聚做的一版名片，后来也成了主页侧栏头像的风格化原型。
 gallery:
-  - /img/opt/bcard_compressed.jpg
-tags:
-  - 补档
-  - 周边
-  - 项目
-permalink: /2022/08/06/project_bcard/
+  - src: /img/opt/bcard_compressed.jpg
+    role: main
+tags: [补档, 周边, 项目]
+permalink: /works/bcard/
+redirect_from:
+  - /2022/08/06/project_bcard/
 ---
 
 当初为了参加极兽聚而做的一版名片。

@@ -48,6 +48,13 @@ kramdown:
       line_numbers: true
       start_line: 1
 
+# ---- 插件 ----
+# jekyll-redirect-from 在 GitHub Pages 白名单内：
+# 把旧 URL（/fblogs/、文章式项目地址）跳转到新的规范 URL（/writing/、/works/<slug>/）。
+plugins:
+  - jekyll-redirect-from
+# 注意：它生成的是带 meta refresh 的跳转页（HTTP 200），不是服务端 301。
+
 # ---- 内容集合 ----
 collections:
   # 项目/作品：与 _posts 解耦的一等公民内容类型。

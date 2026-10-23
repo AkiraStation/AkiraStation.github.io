@@ -2,8 +2,8 @@
 layout: null
 ---
 {%- comment -%}
-  站内搜索索引：文章 + 项目合并为一个数组。
-  每项字段：title / subtitle / tags / url / date / kind
+  站内搜索索引：文章 + 项目合并。
+  除了标题/标签，还带 summary（项目）或正文摘要（文章），这样搜索能命中正文关键词。
 {%- endcomment -%}
 [
 {%- for post in site.posts -%}
@@ -13,11 +13,12 @@ layout: null
     "tags": {{ post.tags | join: ', ' | jsonify }},
     "url": {{ post.url | relative_url | jsonify }},
     "date": {{ post.date | date: '%Y-%m-%d' | jsonify }},
-    "kind": "post"
+    "kind": "post",
+    "summary": {{ post.excerpt | strip_html | normalize_whitespace | truncate: 160 | default: '' | jsonify }}
   }{% unless forloop.last %},{% endunless %}
 {%- endfor -%}
 {%- if site.posts.size > 0 and site.projects.size > 0 %},{% endif -%}
-{%- assign works = site.projects | sort: 'date' | reverse -%}
+{%- assign works = site.projects | sort: 'order' -%}
 {%- for work in works -%}
   {
     "title": {{ work.title | default: '' | jsonify }},
@@ -25,7 +26,8 @@ layout: null
     "tags": {{ work.tags | join: ', ' | jsonify }},
     "url": {{ work.url | relative_url | jsonify }},
     "date": {{ work.date | date: '%Y-%m-%d' | jsonify }},
-    "kind": "project"
+    "kind": "project",
+    "summary": {{ work.summary | default: '' | jsonify }}
   }{% unless forloop.last %},{% endunless %}
 {%- endfor -%}
 ]

@@ -1,8 +1,8 @@
 {%- comment -%}
-  作品网格：遍历 site.projects（按日期倒序）。
-  卡片字段见 _projects/*.md 的 front matter。
+  作品网格：按 front matter 的 order 升序（策展顺序），而不是发布日期。
+  order 缺失时行为不稳定，scripts/lint-content.js 会把它当作必填字段检查。
 {%- endcomment -%}
-{%- assign works = site.projects | sort: 'date' | reverse -%}
+{%- assign works = site.projects | sort: 'order' -%}
 
 {%- if works.size > 0 %}
 <div class="works-grid">

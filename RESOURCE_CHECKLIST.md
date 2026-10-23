@@ -63,25 +63,31 @@
 
 | 想做的事 | 改哪里 |
 |---|---|
-| 新增一个项目/作品 | 在 `_projects/` 新建 Markdown，写 `title / year / type / cover / thumb / summary`，正文即详情内容；URL 默认 `/projects/<文件名>/` |
+| 新增一个项目/作品 | 在 `_projects/` 新建 Markdown，写 `title / year / type / cover / thumb / summary`，正文即详情内容；URL 由 `permalink` 决定（约定 `/works/<slug>/`） |
 | 新增一篇文字 | 在 `_posts/` 新建 `YYYY-MM-DD-slug.md`，`layout: post` |
 | 改首页 Hero 文案 / 图墙图片 / 区块标题 | `_data/home.yml` |
 | 改整体配色、字号、间距 | `css/site.css` 顶部的 `:root` 设计令牌 |
-| 新增一张图片的优化版 | 文件放 img/opt/，并在 _data/asset_map.yml 补「优化版 → 原图」映射 |
+| 新增一张图片的优化版 | 文件放 `img/opt/`，并在 `_data/asset_map.yml` 补「优化版 → 原图」映射 |
+| 新增一个类型或标签 | 先在 `_data/taxonomy.yml` 登记，再写进内容 |
+| 把若干内容串成系列 | 内容写 `series: <slug>` + `series_name: <显示名>`，会出现在 `/series/` |
+| 调整作品排序 | 改项目的 `order`（数字小的在前），不要改日期 |
+| 分清 date 与 year | `date` = 发布（更新时间线/feed 排序）；`year` = 创作年份（筛选条分年） |
+| 画作用不裁切的大图视图 | 项目 front matter 写 `view: art` |
 | 切换浅色主题 | 把 `<html data-theme="dark">` 改成 `data-theme="light"`（`_layouts/base.html`） |
-| 首页不显示某篇文字 | 该文 front matter 写 `hidden: true` |
+| 让某篇不上线 | front matter 写 `published: false`（自定义 `hidden` 已废弃） |
 
 ---
 
 ## 七、推送前自检（不需要装 Ruby）
 
 本机没有 Ruby，无法本地 `jekyll build`；但有两类错误会让 GitHub Pages **整个构建失败**（站点直接报错），
-所以这里放了三个零依赖的 Node 自检脚本，推送前跑一遍即可（在仓库根目录执行）：
+所以这里放了四个零依赖的 Node 自检脚本，推送前跑一遍即可（在仓库根目录执行）：
 
 ```bash
 node scripts/lint-liquid.js .   # Liquid 块标签嵌套（能抓 {% if %}…{% endfor %} 这类错序）
 node scripts/lint-yaml.js .     # front matter / _config.yml / _data 的 YAML 子集校验
 node scripts/lint-vars.js .     # 变量引用是否存在（抓「渲染成空白但不报错」的错键）
+node scripts/lint-content.js .  # 内容字段/分类法/图片/permalink 是否合规
 ```
 
 `lint-yaml.js` 会检查：制表符缩进、顶层重复键、值里未加引号的「冒号+空格」、引号未闭合、
@@ -90,4 +96,4 @@ node scripts/lint-vars.js .     # 变量引用是否存在（抓「渲染成空�
 `lint-vars.js` 覆盖另一类静默失败：引用了数据里不存在的键时 Jekyll 不报错、只渲染成空白。
 它校验 `site.*`、`page.*`、`site.data.home.*`（含 `assign` 别名）与 include 参数契约。
 
-三个脚本都在 `_config.yml` 的 `exclude` 里，不会被发布到站点上。
+四个脚本都在 `_config.yml` 的 `exclude` 里，不会被发布到站点上。

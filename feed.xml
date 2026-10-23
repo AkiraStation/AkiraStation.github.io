@@ -6,25 +6,24 @@ layout: null
   <channel>
     <title>{{ site.title | xml_escape }}</title>
     <description>{{ site.description | xml_escape }}</description>
-    <link>{{ site.url }}{{ site.baseurl }}/</link>
-    <atom:link href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" rel="self" type="application/rss+xml" />
+    <link>{{ '/' | absolute_url }}</link>
+    <atom:link href="{{ '/feed.xml' | absolute_url }}" rel="self" type="application/rss+xml" />
     <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
     <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
     <generator>Jekyll v{{ jekyll.version }}</generator>
-    {% for post in site.posts limit:10 %}
+    {%- comment -%} 项目是本站主内容，所以与文章一起进入 feed {%- endcomment -%}
+    {%- assign all = site.projects | concat: site.posts -%}
+    {%- assign items = all | sort: 'date' | reverse -%}
+    {%- for item in items limit: 20 %}
       <item>
-        <title>{{ post.title | xml_escape }}</title>
-        <description>{{ post.content | xml_escape }}</description>
-        <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
-        <link>{{ post.url | prepend: site.baseurl | prepend: site.url }}</link>
-        <guid isPermaLink="true">{{ post.url | prepend: site.baseurl | prepend: site.url }}</guid>
-        {% for tag in post.tags %}
-        <category>{{ tag | xml_escape }}</category>
-        {% endfor %}
-        {% for cat in post.categories %}
-        <category>{{ cat | xml_escape }}</category>
-        {% endfor %}
+        <title>{{ item.title | xml_escape }}</title>
+        <description>{{ item.summary | default: item.content | xml_escape }}</description>
+        <pubDate>{{ item.date | date_to_rfc822 }}</pubDate>
+        <link>{{ item.url | absolute_url }}</link>
+        <guid isPermaLink="true">{{ item.url | absolute_url }}</guid>
+        {%- if item.type %}<category>{{ item.type | xml_escape }}</category>{% endif %}
+        {%- for tag in item.tags %}<category>{{ tag | xml_escape }}</category>{% endfor %}
       </item>
-    {% endfor %}
+    {%- endfor %}
   </channel>
 </rss>

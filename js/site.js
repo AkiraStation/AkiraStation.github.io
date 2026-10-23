@@ -87,10 +87,23 @@
         chip.classList.add('is-active');
         state[key] = chip.getAttribute('data-value');
         apply();
+        syncUrl();
       });
     });
 
     var counter = document.querySelector('[data-filter-count]');
+
+    // 把筛选状态写进地址栏（?type=画作&year=2025），让视图可分享
+    function syncUrl() {
+      var params = new URLSearchParams(window.location.search);
+      Object.keys(state).forEach(function (k) {
+        if (state[k] === 'all') params.delete(k);
+        else params.set(k, state[k]);
+      });
+      var qs = params.toString();
+      var url = window.location.pathname + (qs ? '?' + qs : '') + window.location.hash;
+      try { window.history.replaceState(null, '', url); } catch (e) { /* file:// 下忽略 */ }
+    }
 
     function apply() {
       var shown = 0;
@@ -112,6 +125,21 @@
       var empty = document.querySelector('[data-filter-empty]');
       if (empty) empty.hidden = shown !== 0;
     }
+
+    // 从 URL 恢复（分享「只看画作」这类链接时生效）
+    var initial = new URLSearchParams(window.location.search);
+    groups.forEach(function (group) {
+      var key = group.getAttribute('data-filter-group');
+      var want = initial.get(key);
+      if (!want) return;
+      var chip = group.querySelector('[data-value="' + want + '"]');
+      if (!chip) return;
+      Array.prototype.forEach.call(group.querySelectorAll('[data-value]'), function (c) {
+        c.classList.remove('is-active');
+      });
+      chip.classList.add('is-active');
+      state[key] = want;
+    });
 
     apply();
   }
@@ -367,6 +395,54 @@
     try { saved = sessionStorage.getItem(key) === '1'; } catch (e) { /* 忽略 */ }
     if (saved) { active = true; swapImages(true); swapCovers(true); sync(); }
   }
+  /* -- 8. 图片放大（点击查看大图） ---------------------------------------- */
+  function initLightbox() {
+    var shots = Array.prototype.slice.call(document.querySelectorAll('[data-zoom]'));
+    if (!shots.length) return;
+
+    var box = document.createElement('div');
+    box.className = 'lightbox';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.setAttribute('aria-label', '查看大图');
+    box.hidden = true;
+    box.innerHTML = '<button class="lightbox-close" type="button" aria-label="关闭">✕</button><img alt="">';
+    document.body.appendChild(box);
+
+    var img = box.querySelector('img');
+    var closeBtn = box.querySelector('.lightbox-close');
+    var lastFocus = null;
+
+    function open(src, alt) {
+      lastFocus = document.activeElement;
+      img.setAttribute('src', src);
+      img.setAttribute('alt', alt || '');
+      box.hidden = false;
+      document.body.classList.add('is-locked');
+      closeBtn.focus();
+    }
+
+    function close() {
+      box.hidden = true;
+      img.removeAttribute('src');
+      document.body.classList.remove('is-locked');
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    shots.forEach(function (el) {
+      el.addEventListener('click', function () {
+        // 尊重「完整资源」模式：此时 src 已被换成原图，放大也看原图
+        open(el.getAttribute('src'), el.getAttribute('alt'));
+      });
+    });
+
+    closeBtn.addEventListener('click', close);
+    box.addEventListener('click', function (e) { if (e.target === box) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !box.hidden) close();
+    });
+  }
+
   /* -- 启动 --------------------------------------------------------------- */
   function boot() {
     initNav();
@@ -376,6 +452,7 @@
     initAnchors();
     initReveal();
     initFullAssets();
+    initLightbox();
   }
 
   if (document.readyState === 'loading') {

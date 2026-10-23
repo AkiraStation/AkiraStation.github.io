@@ -1,5 +1,13 @@
+{%- comment -%}
+  画作图墙：不再是 _data/home.yml 里手写的图片列表，
+  而是从 _projects 里 featured: true 的项目派生（按 order 排序），
+  图片取 cover、标题取 title、链接取 url，因此不会和项目数据脱节。
+{%- endcomment -%}
 {%- assign g = site.data.home.gallery_section -%}
-{%- if g.images and g.images.size > 0 %}
+{%- assign limit = g.count | default: 8 -%}
+{%- assign wall = site.projects | where_exp: 'w', 'w.featured' | sort: 'order' -%}
+
+{%- if wall.size > 0 %}
 <section class="section">
   <div class="container">
     <div class="section-head" data-reveal>
@@ -10,18 +18,21 @@
         <p class="section-sub">{{ g.subtitle }}</p>
         {%- endif %}
       </div>
+      <a class="section-link" href="{{ '/series/' | relative_url }}">
+        按系列浏览 <span aria-hidden="true">→</span>
+      </a>
     </div>
 
     <div class="wall">
       <div class="wall-track">
-        {%- for img in g.images %}
-        <a class="wall-item" href="{{ img.url | relative_url }}">
-          {%- assign item_full = site.data.asset_map[img.src] -%}
-          <img src="{{ img.src | relative_url }}" alt="{{ img.caption }}"{% if item_full %} data-full-src="{{ item_full | relative_url }}"{% endif %}
+        {%- for work in wall limit: limit %}
+        {%- assign cover = work.cover | default: work.thumb -%}
+        {%- assign cover_full = site.data.asset_map[cover] -%}
+        <a class="wall-item" href="{{ work.url | relative_url }}">
+          <img src="{{ cover | relative_url }}" alt="{{ work.title }}"
+               {% if cover_full %}data-full-src="{{ cover_full | relative_url }}"{% endif %}
                loading="lazy" decoding="async">
-          {%- if img.caption %}
-          <span class="wall-caption">{{ img.caption }}</span>
-          {%- endif %}
+          <span class="wall-caption">{{ work.title }}</span>
         </a>
         {%- endfor %}
       </div>

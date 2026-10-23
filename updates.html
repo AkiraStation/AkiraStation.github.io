@@ -1,0 +1,36 @@
+---
+layout: base
+title: 全部更新
+eyebrow: Update log
+description: "项目与文字的合并时间线"
+permalink: /updates/
+---
+
+{% include base/page-header.html %}
+
+<section class="section">
+  <div class="container container--narrow">
+    {%- assign all = site.projects | concat: site.posts -%}
+    {%- assign timeline = all | sort: 'date' | reverse -%}
+
+    {%- if timeline.size > 0 %}
+    <div class="posts">
+      {%- for item in timeline %}
+      <a class="post-row" href="{{ item.url | relative_url }}" data-reveal>
+        <div class="post-row-num">{{ item.date | date: '%m.%d' }}</div>
+        <div class="post-row-body">
+          <div class="post-row-title">{{ item.title }}</div>
+          <div class="post-row-sub">
+            <span class="kind-badge">{% if item.type %}项目{% else %}文字{% endif %}</span>
+            {{ item.summary | default: item.subtitle | default: '' }}
+          </div>
+        </div>
+        <div class="post-row-meta">{{ item.date | date: '%Y' }}</div>
+      </a>
+      {%- endfor %}
+    </div>
+    {%- else %}
+    <p class="empty-state">还没有任何内容。</p>
+    {%- endif %}
+  </div>
+</section>

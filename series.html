@@ -1,0 +1,40 @@
+---
+layout: base
+title: 系列
+eyebrow: Series
+description: "把作品与文字按系列串起来"
+permalink: /series/
+---
+
+{% include base/page-header.html %}
+
+<section class="section">
+  <div class="container container--narrow">
+    {%- assign all = site.projects | concat: site.posts -%}
+    {%- assign with_series = all | where_exp: 'item', 'item.series' -%}
+    {%- assign groups = with_series | group_by: 'series' | sort: 'name' -%}
+
+    {%- if groups.size > 0 %}
+      {%- for g in groups %}
+      {%- assign display = g.items.first.series_name | default: g.name %}
+      <div class="year-block" id="{{ g.name }}">
+        <h2 class="year-label">{{ display }}<span class="label-count">{{ g.items.size }}</span></h2>
+        <div class="posts">
+          {%- for item in g.items %}
+          <a class="post-row" href="{{ item.url | relative_url }}" data-reveal>
+            <div class="post-row-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+            <div class="post-row-body">
+              <div class="post-row-title">{{ item.title }}</div>
+              <div class="post-row-sub">{{ item.summary | default: item.subtitle | default: '' }}</div>
+            </div>
+            <div class="post-row-meta">{{ item.date | date: '%Y' }}</div>
+          </a>
+          {%- endfor %}
+        </div>
+      </div>
+      {%- endfor %}
+    {%- else %}
+      <p class="empty-state">还没有带 <code>series</code> 的内容。</p>
+    {%- endif %}
+  </div>
+</section>

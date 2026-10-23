@@ -1281,3 +1281,81 @@ body.is-locked { overflow: hidden; }
 .posts:empty { border-top: 0; }
 
 @media print { .asset-quality { display: none; } }
+
+/* == 22 画作视图 / 图集 / 图片放大 ======================================== */
+.project-gallery .shot { margin: 0; }
+
+.project-gallery figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--ink-3);
+  text-align: center;
+}
+
+.project-gallery img { cursor: zoom-in; }
+
+/* 画作视图：不裁切、居中、留出观看空间（周边视图保持原样） */
+.project--art .project-gallery img {
+  object-fit: contain;
+  background: var(--surface);
+  max-height: 84vh;
+}
+
+/* 系列页的分组计数 */
+.label-count {
+  margin-left: 0.6rem;
+  padding: 0.05rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--ink-3);
+  font-size: 0.7rem;
+  font-weight: 400;
+}
+
+/* 更新时间线里的类型标记 */
+.kind-badge {
+  display: inline-block;
+  margin-right: 0.4rem;
+  padding: 0.05rem 0.5rem;
+  border-radius: 999px;
+  background: var(--accent-weak);
+  color: var(--accent);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+}
+
+/* 图片放大浮层 */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 5vw, 3rem);
+  background: rgba(6, 7, 9, 0.92);
+  backdrop-filter: blur(6px);
+  cursor: zoom-out;
+}
+.lightbox[hidden] { display: none; }
+
+.lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  background: rgba(11, 12, 15, 0.7);
+}

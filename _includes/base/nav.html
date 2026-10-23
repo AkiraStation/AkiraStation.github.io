@@ -21,7 +21,8 @@
 
         <a class="nav-link{% if current == '/' %} is-active{% endif %}" href="{{ '/' | relative_url }}">首页</a>
         <a class="nav-link{% if is_project or current contains '/projects/' %} is-active{% endif %}" href="{{ '/projects/' | relative_url }}">项目</a>
-        <a class="nav-link{% if is_writing or current contains '/fblogs/' %} is-active{% endif %}" href="{{ '/fblogs/' | relative_url }}">文字</a>
+        <a class="nav-link{% if is_writing or current contains '/writing/' %} is-active{% endif %}" href="{{ '/writing/' | relative_url }}">文字</a>
+        <a class="nav-link{% if current contains '/updates/' %} is-active{% endif %}" href="{{ '/updates/' | relative_url }}">更新</a>
         <a class="nav-link{% if current contains '/about/' %} is-active{% endif %}" href="{{ '/about/' | relative_url }}">关于</a>
       </nav>
 

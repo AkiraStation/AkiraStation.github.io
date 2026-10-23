@@ -3,15 +3,25 @@ layout: base
 ---
 {%- comment -%}
   项目详情页。字段来自 _projects/*.md：
-  title / subtitle / date / author / year / type / cover / thumb / summary /
-  gallery / tools / links / tags
+  title / subtitle / date(发布) / year(创作) / type / view / status / series /
+  series_name / order / featured / medium / edition / tools / cover / thumb /
+  summary / gallery[{src, caption, role}] / links / tags / permalink
 {%- endcomment -%}
+{%- assign works = site.projects | sort: 'order' -%}
 
-<article class="project">
+{%- comment -%} 封面：优先 cover，其次图集里 role=main 的那张 {%- endcomment -%}
+{%- assign cover = page.cover -%}
+{%- unless cover -%}
+  {%- for shot in page.gallery -%}
+    {%- if shot.role == 'main' -%}{%- assign cover = shot.src -%}{%- endif -%}
+  {%- endfor -%}
+{%- endunless -%}
+{%- assign cover_full = site.data.asset_map[cover] -%}
+
+<article class="project{% if page.view == 'art' %} project--art{% endif %}">
   <div class="project-hero">
-    {%- if page.cover %}
-    {%- assign cover_full = site.data.asset_map[page.cover] -%}
-    <img class="project-cover" src="{{ page.cover | relative_url }}" alt="{{ page.title }}"{% if cover_full %} data-full-src="{{ cover_full | relative_url }}"{% endif %}
+    {%- if cover %}
+    <img class="project-cover" src="{{ cover | relative_url }}" alt="{{ page.title }}"{% if cover_full %} data-full-src="{{ cover_full | relative_url }}"{% endif %}
          fetchpriority="high" decoding="async">
     {%- endif %}
     <div class="container">
@@ -29,21 +39,18 @@ layout: base
 
   <div class="container container--narrow">
     <dl class="project-meta">
-      {%- if page.year %}
-      <div><dt>年份</dt><dd>{{ page.year }}</dd></div>
+      {%- if page.year %}<div><dt>创作</dt><dd>{{ page.year }}</dd></div>{% endif %}
+      {%- if page.date %}<div><dt>发布</dt><dd>{{ page.date | date: '%Y-%m-%d' }}</dd></div>{% endif %}
+      {%- if page.type %}<div><dt>类型</dt><dd>{{ page.type }}</dd></div>{% endif %}
+      {%- if page.status %}<div><dt>状态</dt><dd>{{ page.status }}</dd></div>{% endif %}
+      {%- if page.medium %}<div><dt>媒介</dt><dd>{{ page.medium }}</dd></div>{% endif %}
+      {%- if page.edition %}<div><dt>限量</dt><dd>{{ page.edition }}</dd></div>{% endif %}
+      {%- if page.author %}<div><dt>作者</dt><dd>{{ page.author }}</dd></div>{% endif %}
+      {%- if page.tools %}<div><dt>工具</dt><dd>{{ page.tools | join: ' · ' }}</dd></div>{% endif %}
+      {%- if page.series %}
+      <div><dt>系列</dt><dd><a href="{{ '/series/' | relative_url }}#{{ page.series }}">{{ page.series_name | default: page.series }}</a></dd></div>
       {%- endif %}
-      {%- if page.type %}
-      <div><dt>类型</dt><dd>{{ page.type }}</dd></div>
-      {%- endif %}
-      {%- if page.author %}
-      <div><dt>作者</dt><dd>{{ page.author }}</dd></div>
-      {%- endif %}
-      {%- if page.tools %}
-      <div><dt>工具</dt><dd>{{ page.tools | join: ' · ' }}</dd></div>
-      {%- endif %}
-      {%- if page.tags %}
-      <div><dt>标签</dt><dd>{{ page.tags | join: ' · ' }}</dd></div>
-      {%- endif %}
+      {%- if page.tags %}<div><dt>标签</dt><dd>{{ page.tags | join: ' · ' }}</dd></div>{% endif %}
     </dl>
 
     {%- if content != '' %}
@@ -53,9 +60,18 @@ layout: base
     {%- if page.gallery and page.gallery.size > 0 %}
     <div class="project-gallery">
       {%- for shot in page.gallery %}
-      {%- assign shot_full = site.data.asset_map[shot] -%}
-      <img src="{{ shot | relative_url }}" alt="{{ page.title }} 图片 {{ forloop.index }}"{% if shot_full %} data-full-src="{{ shot_full | relative_url }}"{% endif %}
-           loading="lazy" decoding="async">
+      {%- assign src = shot.src | default: shot -%}
+      {%- assign full = site.data.asset_map[src] -%}
+      {%- assign alt = shot.caption | default: page.title -%}
+      <figure class="shot">
+        <img src="{{ src | relative_url }}" alt="{{ alt }}"
+             {% if full %}data-full-src="{{ full | relative_url }}"{% endif %}
+             data-zoom="{{ src | relative_url }}"
+             loading="lazy" decoding="async">
+        {%- unless page.view == 'art' %}
+          {%- if shot.caption %}<figcaption>{{ shot.caption }}</figcaption>{% endif %}
+        {%- endunless %}
+      </figure>
       {%- endfor %}
     </div>
     {%- endif %}
@@ -63,14 +79,11 @@ layout: base
     {%- if page.links %}
     <p class="section-sub">
       相关链接：
-      {%- for l in page.links %}
-      <a href="{{ l.url }}">{{ l.label }}</a>{% unless forloop.last %} · {% endunless %}
-      {%- endfor %}
+      {%- for l in page.links %}<a href="{{ l.url }}">{{ l.label }}</a>{% unless forloop.last %} · {% endunless %}{%- endfor %}
     </p>
     {%- endif %}
 
-    {%- comment -%} 同系列的前后项目（按日期倒序，较新 → 较旧） {%- endcomment -%}
-    {%- assign works = site.projects | sort: 'date' | reverse -%}
+    {%- comment -%} 前后项目按 order（与网格一致） {%- endcomment -%}
     {%- assign prev_url = '' -%}{%- assign prev_title = '' -%}
     {%- assign next_url = '' -%}{%- assign next_title = '' -%}
     {%- assign found = false -%}
@@ -78,9 +91,7 @@ layout: base
       {%- if w.url == page.url -%}
         {%- assign found = true -%}
       {%- elsif found -%}
-        {%- if next_url == '' -%}
-          {%- assign next_url = w.url -%}{%- assign next_title = w.title -%}
-        {%- endif -%}
+        {%- if next_url == '' -%}{%- assign next_url = w.url -%}{%- assign next_title = w.title -%}{%- endif -%}
       {%- else -%}
         {%- assign prev_url = w.url -%}{%- assign prev_title = w.title -%}
       {%- endif -%}
@@ -89,14 +100,10 @@ layout: base
     {%- if prev_url != '' or next_url != '' %}
     <nav class="project-pager" aria-label="项目导航">
       {%- if prev_url != '' %}
-      <a class="pager-link" href="{{ prev_url | relative_url }}">
-        <span>较新</span>{{ prev_title }}
-      </a>
+      <a class="pager-link" href="{{ prev_url | relative_url }}"><span>上一个</span>{{ prev_title }}</a>
       {%- endif %}
       {%- if next_url != '' %}
-      <a class="pager-link pager-link--next" href="{{ next_url | relative_url }}">
-        <span>较旧</span>{{ next_title }}
-      </a>
+      <a class="pager-link pager-link--next" href="{{ next_url | relative_url }}"><span>下一个</span>{{ next_title }}</a>
       {%- endif %}
     </nav>
     {%- endif %}

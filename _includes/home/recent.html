@@ -11,17 +11,16 @@
         <p class="section-sub">{{ s.subtitle }}</p>
         {%- endif %}
       </div>
-      <a class="section-link" href="{{ '/fblogs/' | relative_url }}">
-        全部文字 <span aria-hidden="true">→</span>
+      <a class="section-link" href="{{ '/updates/' | relative_url }}">
+        全部更新 <span aria-hidden="true">→</span>
       </a>
     </div>
 
+    {%- if site.posts.size > 0 %}
     <div class="posts">
-      {%- assign shown = 0 -%}
-      {%- for post in site.posts limit: n %}{% unless post.hidden %}
-      {%- assign shown = shown | plus: 1 -%}
+      {%- for post in site.posts limit: n %}
       <a class="post-row" href="{{ post.url | relative_url }}" data-reveal>
-        <div class="post-row-num">{{ shown | prepend: '0' | slice: -2, 2 }}</div>
+        <div class="post-row-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
         <div class="post-row-body">
           <div class="post-row-title">{{ post.title }}</div>
           {%- if post.subtitle %}
@@ -30,9 +29,9 @@
         </div>
         <div class="post-row-meta">{{ post.date | date: '%Y.%m.%d' }}</div>
       </a>
-      {%- endunless %}{% endfor %}
+      {%- endfor %}
     </div>
-    {%- if shown == 0 %}
+    {%- else %}
     <p class="empty-state">还没有文章。等第一篇写下之后，它会出现在这里。</p>
     {%- endif %}
   </div>
