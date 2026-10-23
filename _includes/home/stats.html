@@ -1,16 +1,17 @@
 {%- assign works = site.projects -%}
 
 {%- comment -%}
-  标签个数：把项目与文章的标签汇总去重。
+  标签种类数：把项目与文章的标签汇总后去重计数。
   GitHub Pages 经典构建没有自定义插件，所以用 Liquid 手工汇总：
-  用 "|" 拼接后 split + uniq，末尾会多出一个空串，故减 1。
+  用 "|" 拼接后 split + uniq。
+  注意 Ruby 的 split 会丢弃「尾部空串」，所以末尾那个 "|" 不会产生空元素，
+  直接取 size 即可（不要减 1）。
 {%- endcomment -%}
 {%- assign raw_tags = '' -%}
 {%- for w in site.projects -%}{%- for t in w.tags -%}{%- assign raw_tags = raw_tags | append: t | append: '|' -%}{%- endfor -%}{%- endfor -%}
 {%- for p in site.posts -%}{%- for t in p.tags -%}{%- assign raw_tags = raw_tags | append: t | append: '|' -%}{%- endfor -%}{%- endfor -%}
 {%- assign tag_list = raw_tags | split: '|' | uniq -%}
-{%- assign tag_count = 0 -%}
-{%- if raw_tags != '' -%}{%- assign tag_count = tag_list.size | minus: 1 -%}{%- endif -%}
+{%- assign tag_count = tag_list.size -%}
 
 <section class="stats">
   <div class="container">
