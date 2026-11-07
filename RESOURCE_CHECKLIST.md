@@ -66,6 +66,8 @@
 | 新增一个项目/作品 | 在 `_projects/` 新建 Markdown，写 `title / year / type / cover / thumb / summary`，正文即详情内容；URL 由 `permalink` 决定（约定 `/works/<slug>/`） |
 | 新增一篇文字 | 在 `_posts/` 新建 `YYYY-MM-DD-slug.md`，`layout: post` |
 | 改首页 Hero 文案 / 图墙图片 / 区块标题 | `_data/home.yml` |
+| 新增一首「近期喜欢的音乐」 | 在 _data/music.yml 的 items 里加一条：	itle / artist / cover / url（
+ote 可选） |
 | 改整体配色、字号、间距 | `css/site.css` 顶部的 `:root` 设计令牌 |
 | 新增一张图片的优化版 | 文件放 `img/opt/`，并在 `_data/asset_map.yml` 补「优化版 → 原图」映射 |
 | 新增一个类型或标签 | 先在 `_data/taxonomy.yml` 登记，再写进内容 |

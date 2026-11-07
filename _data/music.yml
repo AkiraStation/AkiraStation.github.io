@@ -1,22 +1,8 @@
 # ============================================================
 # 近期喜欢的音乐（About 页轮播）
 # ------------------------------------------------------------
-# 填写方式：把 items 下的示例换成你自己的条目即可。
-#
-# 每一项支持这些字段：
-#   title   曲名
-#   artist  曲师 / 演唱
-#   cover   封面图：站内路径（如 /img/music/xxx.jpg）或 https:// 外链
-#   url     点击封面后跳转的 B 站视频地址
-#   note    可选，卡片底部的一行小字
-#
-# 示例：
-# items:
-#   - title: 曲名
-#     artist: 曲师
-#     cover: /img/music/cover-1.jpg
-#     url: https://www.bilibili.com/video/BVxxxxxxxxxx
-#     note: 循环了一整周
+# items 为空时，About 页不会显示这一区块；填上条目后自动出现。
+# 把下面的注释块取消注释、改成你自己的内容即可。
 # ============================================================
 
 enabled: true
@@ -24,34 +10,19 @@ eyebrow: Listening
 title: 近期喜欢的音乐
 subtitle: 最近在循环的一些东西，点封面去 B 站
 
-items:
-  - title: 示例曲目一
-    artist: 示例曲师
-    cover: /img/smol/summer_smol.jpg
-    url: https://www.bilibili.com/video/BV1xx411c7mD
-    note: 占位条目，替换成你的
-  - title: 示例曲目二
-    artist: 示例曲师
-    cover: /img/smol/clog_smol.jpg
-    url: https://www.bilibili.com/video/BV1xx411c7mD
-    note:
-  - title: 示例曲目三
-    artist: 示例曲师
-    cover: /img/smol/bcard_smol.jpg
-    url: https://www.bilibili.com/video/BV1xx411c7mD
-    note:
-  - title: 示例曲目四
-    artist: 示例曲师
-    cover: /img/smol/bprint_smol.jpg
-    url: https://www.bilibili.com/video/BV1xx411c7mD
-    note:
-  - title: 示例曲目五
-    artist: 示例曲师
-    cover: /img/smol/token_smol.jpg
-    url: https://www.bilibili.com/video/BV1xx411c7mD
-    note:
-  - title: 示例曲目六
-    artist: 示例曲师
-    cover: /img/404_bg.jpg
-    url: https://www.bilibili.com/video/BV1xx411c7mD
-    note:
+items: []
+
+# ---- 填写格式（把 items: [] 换成下面的写法）----
+# 每一项支持：
+#   title   曲名
+#   artist  曲师 / 演唱
+#   cover   封面：站内路径（如 /img/music/cover-1.jpg）或 https:// 外链
+#   url     点击后跳转的 B 站视频地址（必须是完整的 http(s) 链接）
+#   note    可选，卡片底部的一行小字
+#
+# items:
+#   - title: 曲名
+#     artist: 曲师
+#     cover: /img/music/cover-1.jpg
+#     url: https://www.bilibili.com/video/BVxxxxxxxxxx
+#     note: 循环了一整周

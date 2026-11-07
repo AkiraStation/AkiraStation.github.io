@@ -80,6 +80,23 @@ scripts/           推送前自检脚本（不参与构建）
 - **系列**：内容写 `series: backfill` + `series_name: 补档`，就会出现在 `/series/`，
   详情页「系列」一行也可点击。系列是成组的正式手段；`tags` 是次要元数据。
 
+## 近期喜欢的音乐（About 页）
+
+About 页个人介绍之后是一个横向轮播，数据在 `_data/music.yml`：
+
+```yaml
+items:
+  - title: 曲名
+    artist: 曲师
+    cover: /img/music/cover-1.jpg        # 站内路径，或 https:// 外链
+    url: https://www.bilibili.com/video/BVxxxxxxxxxx
+    note: 可选，卡片底部一行小字
+```
+
+- 点击卡片（封面 / 标题 / 曲师任意位置）都会在新标签页打开 B 站视频。
+- 左右按钮按卡片宽度滚动，滚到两端会自动禁用；键盘聚焦列表后可用 ← / → 切换。
+- `items` 为空或 `enabled: false` 时整段不渲染，About 页保持原样。
+- 封面图片放 `img/music/` 即可；`scripts/lint-content.js` 会检查 url 格式与封面文件是否存在。
 ## 图片：优化版与原图
 
 页面默认加载 `img/opt/` 下的**优化版**，**原始分辨率图全部保留**在 `img/` 下、一张都没被覆盖：
