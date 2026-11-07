@@ -443,6 +443,41 @@
     });
   }
 
+  /* -- 9. 音乐轮播（About 页） -------------------------------------------- */
+  function initMusicCarousel() {
+    var track = document.querySelector('[data-music-track]');
+    if (!track) return;
+    var cards = Array.prototype.slice.call(track.querySelectorAll('.music-card'));
+    if (!cards.length) return;
+
+    var prev = document.querySelector('[data-music-prev]');
+    var next = document.querySelector('[data-music-next]');
+
+    function stepSize() {
+      var gap = parseFloat(window.getComputedStyle(track).columnGap) || 0;
+      return cards[0].getBoundingClientRect().width + gap;
+    }
+    function scrollByCards(dir) {
+      var left = dir * stepSize();
+      if (track.scrollBy) track.scrollBy({ left: left, behavior: reduceMotion ? 'auto' : 'smooth' });
+      else track.scrollLeft += left;
+    }
+    function update() {
+      var max = track.scrollWidth - track.clientWidth;
+      if (prev) prev.disabled = track.scrollLeft <= 1;
+      if (next) next.disabled = track.scrollLeft >= max - 1;
+    }
+
+    if (prev) prev.addEventListener('click', function () { scrollByCards(-1); });
+    if (next) next.addEventListener('click', function () { scrollByCards(1); });
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); scrollByCards(-1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); scrollByCards(1); }
+    });
+    update();
+  }
   /* -- 启动 --------------------------------------------------------------- */
   function boot() {
     initNav();
@@ -453,6 +488,7 @@
     initReveal();
     initFullAssets();
     initLightbox();
+    initMusicCarousel();
   }
 
   if (document.readyState === 'loading') {

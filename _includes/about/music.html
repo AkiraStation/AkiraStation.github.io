@@ -1,0 +1,68 @@
+{%- comment -%}
+  近期喜欢的音乐：横向滚动卡片。
+  数据来自 _data/music.yml，条目为空或 enabled: false 时整段不渲染。
+  卡片整块是链接，点击（封面/标题/曲师）都会在新标签页打开 url。
+{%- endcomment -%}
+{%- assign m = site.data.music -%}
+{%- if m and m.enabled and m.items and m.items.size > 0 %}
+
+<section class="section music" aria-labelledby="music-title">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div>
+        <p class="section-eyebrow">{{ m.eyebrow | default: 'Listening' }}</p>
+        <h2 class="section-title" id="music-title">{{ m.title | default: '近期喜欢的音乐' }}</h2>
+        {%- if m.subtitle %}
+        <p class="section-sub">{{ m.subtitle }}</p>
+        {%- endif %}
+      </div>
+
+      <div class="music-nav">
+        <button class="music-arrow" type="button" data-music-prev aria-label="上一张">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M15 5 8 12l7 7"></path>
+          </svg>
+        </button>
+        <button class="music-arrow" type="button" data-music-next aria-label="下一张">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="m9 5 7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="music-track" data-music-track tabindex="0" role="list"
+         aria-label="{{ m.title | default: '近期喜欢的音乐' }}（可用左右方向键滚动）">
+      {%- for item in m.items %}
+      {%- assign cover = item.cover -%}
+      {%- if cover and cover contains '://' -%}
+        {%- assign cover_src = cover -%}
+      {%- else -%}
+        {%- assign cover_src = cover | relative_url -%}
+      {%- endif %}
+      <a class="music-card" role="listitem" href="{{ item.url }}" target="_blank" rel="noopener noreferrer">
+        <span class="music-cover">
+          {%- if cover_src %}
+          <img src="{{ cover_src }}" alt="{{ item.title }} 封面" loading="lazy" decoding="async">
+          {%- endif %}
+          <span class="music-play" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"></path>
+            </svg>
+          </span>
+          <span class="music-ext" aria-hidden="true">↗</span>
+        </span>
+        <span class="music-meta">
+          <span class="music-title">{{ item.title }}</span>
+          <span class="music-artist">{{ item.artist }}</span>
+          {%- if item.note %}
+          <span class="music-note">{{ item.note }}</span>
+          {%- endif %}
+        </span>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{%- endif %}

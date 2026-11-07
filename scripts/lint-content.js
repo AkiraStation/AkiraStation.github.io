@@ -197,6 +197,34 @@ for (const f of posts) {
   });
 }
 
+/* ---------- 校验音乐条目 ---------- */
+function checkMusic() {
+  const file = path.join(root, '_data', 'music.yml');
+  if (!fs.existsSync(file)) return;
+  const lines = fs.readFileSync(file, 'utf8').split(/\r?\n/);
+  let inItems = false;
+  const items = [];
+  let cur = null;
+  for (const raw of lines) {
+    if (/^items:\s*$/.test(raw)) { inItems = true; continue; }
+    if (!inItems) continue;
+    if (raw.trim() !== '' && /^\S/.test(raw)) break;
+    const head = /^\s*-\s*([\w-]+):\s*(.*)$/.exec(raw);
+    if (head) { cur = {}; cur[head[1]] = head[2].trim(); items.push(cur); continue; }
+    const kv = /^\s+([\w-]+):\s*(.*)$/.exec(raw);
+    if (kv && cur) cur[kv[1]] = kv[2].trim();
+  }
+  items.forEach((it, i) => {
+    const where = '_data/music.yml items[' + i + ']';
+    ['title', 'artist', 'cover', 'url'].forEach(function (key) {
+      if (!it[key]) err(where, '缺少 ' + key);
+    });
+    if (it.url && !/^https?:\/\//.test(it.url)) err(where, 'url 必须是完整 http(s) 地址：' + it.url);
+    if (it.cover && !/^https?:\/\//.test(it.cover) && !imageExists(it.cover)) err(where, '封面文件不存在：' + it.cover);
+  });
+}
+checkMusic();
+
 /* ---------- 分类法反查 ---------- */
 for (const t of TYPES) if (!usedTypes.has(t)) warn('_data/taxonomy.yml', `types 里的「${t}」没有任何项目在用`);
 for (const t of TAGS) if (!usedTags.has(t)) warn('_data/taxonomy.yml', `tags 里的「${t}」没有任何内容在用`);
