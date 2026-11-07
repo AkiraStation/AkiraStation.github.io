@@ -90,11 +90,12 @@ items:
     artist: 曲师
     cover: /img/music/cover-1.jpg        # 站内路径，或 https:// 外链
     url: https://www.bilibili.com/video/BVxxxxxxxxxx
-    note: 可选，卡片底部一行小字
+    desc: 可选，曲师下面的一行简介（兼容旧字段 note）
 ```
 
 - 点击卡片（封面 / 标题 / 曲师任意位置）都会在新标签页打开 B 站视频。
 - 左右按钮按卡片宽度滚动，滚到两端会自动禁用；键盘聚焦列表后可用 ← / → 切换。
+- 每条可带一行简介 `desc`，显示在曲师下方（最多两行，超出截断）。
 - `items` 为空或 `enabled: false` 时整段不渲染，About 页保持原样。
 - 封面图片放 `img/music/` 即可；`scripts/lint-content.js` 会检查 url 格式与封面文件是否存在。
 ## 图片：优化版与原图

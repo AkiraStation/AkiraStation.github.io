@@ -55,8 +55,9 @@
         <span class="music-meta">
           <span class="music-title">{{ item.title }}</span>
           <span class="music-artist">{{ item.artist }}</span>
-          {%- if item.note %}
-          <span class="music-note">{{ item.note }}</span>
+          {%- assign blurb = item.desc | default: item.note %}
+          {%- if blurb %}
+          <span class="music-desc">{{ blurb }}</span>
           {%- endif %}
         </span>
       </a>

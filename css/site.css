@@ -1399,7 +1399,19 @@ body.is-locked { overflow: hidden; }
 .music-title { font-size: .92rem; line-height: 1.35; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; transition: color .2s var(--ease); }
 .music-card:hover .music-title { color: var(--accent); }
 .music-artist { font-size: .78rem; color: var(--ink-3); }
-.music-note { font-size: .74rem; color: var(--ink-3); }
+
+/* 每条音乐曲师下方的一行简介（最多两行） */
+.music-desc,
+.music-note {
+  margin-top: .15rem;
+  font-size: .76rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
 @media (hover: none) { .music-play { opacity: 1; background: rgba(6,7,9,.25); } }
 @media print { .music-nav { display: none; } }

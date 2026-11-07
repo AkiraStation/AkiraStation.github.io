@@ -7,9 +7,9 @@
 # 每一项支持：
 #   title   曲名
 #   artist  曲师 / 演唱
+#   desc    曲师下面的一行简介（可选；旧字段名 note 仍然兼容）
 #   cover   封面：站内路径（如 /img/music/cover-1.jpg）或 https:// 外链
 #   url     点击后跳转的 B 站视频地址（必须是完整的 http(s) 链接）
-#   note    可选，卡片底部的一行小字
 # ============================================================
 
 enabled: true
@@ -20,22 +20,26 @@ subtitle: 最近在循环的一些东西，点封面去 B 站
 items:
   - title: 示例曲目 01
     artist: 示例曲师
+    desc: 这里写一小条简介，比如听感、出处，或者为什么喜欢
     cover: /img/smol/summer_smol.jpg
     url: https://www.bilibili.com/
-    note: 把这 5 条换成你的歌单
   - title: 示例曲目 02
     artist: 示例曲师
+    desc: 简介最多显示两行，超出的部分会被截断
     cover: /img/smol/clog_smol.jpg
     url: https://www.bilibili.com/
   - title: 示例曲目 03
     artist: 示例曲师
+    desc: 可以把这 5 条换成你自己的歌单
     cover: /img/smol/bprint_smol.jpg
     url: https://www.bilibili.com/
   - title: 示例曲目 04
     artist: 示例曲师
+    desc: 每条都可以不一样的长度
     cover: /img/smol/token_smol.jpg
     url: https://www.bilibili.com/
   - title: 示例曲目 05
     artist: 示例曲师
+    desc: 不想要整块就把 items 改回 []
     cover: /img/404_bg.jpg
     url: https://www.bilibili.com/
