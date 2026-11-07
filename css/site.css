@@ -1376,12 +1376,14 @@ body.is-locked { overflow: hidden; }
   gap: clamp(.85rem, 2vw, 1.25rem);
   overflow-x: auto; overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
-  padding-bottom: .75rem;
-  scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent;
+  /* 不显示横向滚动条：翻页交给右上角的左右按钮（触屏仍可原生滑动） */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* 留一点余量给封面悬停放大与焦点轮廓，避免被裁切 */
+  padding-bottom: .5rem;
   outline-offset: 4px;
 }
-.music-track::-webkit-scrollbar { height: 6px; }
-.music-track::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 999px; }
+.music-track::-webkit-scrollbar { display: none; }
 
 .music-card { scroll-snap-align: start; display: flex; flex-direction: column; gap: .6rem; text-decoration: none; color: inherit; }
 .music-card:hover { color: inherit; }
